@@ -15,47 +15,6 @@ public class ApiContextSeed
         {
             var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            /* if (!context.Especies.Any())
-            {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/especie.csv"))
-                {
-                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Especie>();
-                        context.Especies.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            }  */
-
-            /* if (!context.Razas.Any())
-            {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\raza.csv"))
-                {
-                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
-                        MissingFieldFound = null
-                    }))
-                    {
-                        // Resto de tu código para leer y procesar el archivo CSV
-                        var list = csv.GetRecords<Raza>();
-                        List<Raza> entidad = new List<Raza>();
-                        foreach (var item in list)
-                        {
-                            entidad.Add(new Raza
-                            {
-                                Id = item.Id,
-                                IdEspecieFk = item.IdEspecieFk,
-                                Nombre = item.Nombre
-                            });
-                        }
-                        context.Razas.AddRange(entidad);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } */
-
             if (!context.Usuarios.Any())
             {
                 using (var reader = new StreamReader(ruta + @"/Data/Csv/usuario.csv"))
