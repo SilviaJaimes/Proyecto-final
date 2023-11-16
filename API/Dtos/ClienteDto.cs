@@ -1,7 +1,8 @@
+using Dominio.Entities;
 
-namespace Dominio.Entities;
+namespace API.Dtos;
 
-public class Cliente : BaseEntity
+public class ClienteDto : BaseEntity
 {
     public string NombreCliente { get; set; }
     public string NombreContacto { get; set; }
@@ -15,9 +16,6 @@ public class Cliente : BaseEntity
     public string Pais { get; set; }
     public string CodigoPostal { get; set; }
     public int CodigoEmpleado { get; set; }
-    public Empleado Empleado { get; set; }
+    public EmpleadoDto Empleado { get; set; }
     public decimal LimiteCredito { get; set; }
-
-    public ICollection<Pago> Pagos { get; set; }
-    public ICollection<Pedido> Pedidos { get; set; }
 }

@@ -33,8 +33,7 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
         builder.Property(p => p.Apellido2)
         .HasColumnName("apellido2")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
 
         builder.Property(p => p.Extension)
         .HasColumnName("extension")
@@ -59,7 +58,6 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
         builder.Property(p => p.Puesto)
         .HasColumnName("puesto")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
     }
 }

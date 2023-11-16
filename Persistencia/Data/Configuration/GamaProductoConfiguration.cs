@@ -21,19 +21,16 @@ public class GamaProductoConfiguration : IEntityTypeConfiguration<GamaProducto>
         builder.Property(p => p.DescripcionTexto)
         .HasColumnName("descripcionTexto")
         .HasColumnType("text")
-        .HasMaxLength(250)
-        .IsRequired();
+        .HasMaxLength(250);
 
         builder.Property(p => p.DescripcionHtml)
         .HasColumnName("descripcionHtml")
         .HasColumnType("text")
-        .HasMaxLength(250)
-        .IsRequired();
+        .HasMaxLength(250);
 
         builder.Property(p => p.Imagen)
         .HasColumnName("imagen")
         .HasColumnType("varchar")
-        .HasMaxLength(256)
-        .IsRequired();
+        .HasMaxLength(256);
     }
 }

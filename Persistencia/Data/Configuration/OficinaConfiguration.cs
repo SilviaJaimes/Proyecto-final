@@ -33,8 +33,7 @@ public class OficinaConfiguration : IEntityTypeConfiguration<Oficina>
         builder.Property(p => p.Region)
         .HasColumnName("region")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
 
         builder.Property(p => p.CodigoPostal)
         .HasColumnName("codigoPostal")
@@ -57,7 +56,6 @@ public class OficinaConfiguration : IEntityTypeConfiguration<Oficina>
         builder.Property(p => p.LineaDireccion2)
         .HasColumnName("lineaDireccion2")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
     }
 }

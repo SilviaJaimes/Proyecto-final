@@ -27,14 +27,12 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
         builder.Property(p => p.NombreContacto)
         .HasColumnName("nombreContacto")
         .HasColumnType("varchar")
-        .HasMaxLength(30)
-        .IsRequired();
+        .HasMaxLength(30);
 
         builder.Property(p => p.ApellidoContacto)
         .HasColumnName("apellidoContacto")
         .HasColumnType("varchar")
-        .HasMaxLength(30)
-        .IsRequired();
+        .HasMaxLength(30);
 
         builder.Property(p => p.Telefono)
         .HasColumnName("telefono")
@@ -57,8 +55,7 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
         builder.Property(p => p.LineaDireccion2)
         .HasColumnName("lineaDireccion2")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
 
         builder.Property(p => p.Ciudad)
         .HasColumnName("ciudad")
@@ -69,20 +66,17 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
         builder.Property(p => p.Region)
         .HasColumnName("region")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
 
         builder.Property(p => p.Pais)
         .HasColumnName("pais")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
-        .IsRequired();
+        .HasMaxLength(50);
 
         builder.Property(p => p.CodigoPostal)
         .HasColumnName("codigoPostal")
         .HasColumnType("varchar")
-        .HasMaxLength(10)
-        .IsRequired();
+        .HasMaxLength(10);
 
         builder.HasOne(d => d.Empleado)
         .WithMany(d => d.Clientes)
@@ -91,7 +85,6 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
         builder.Property(p => p.LimiteCredito)
         .HasColumnName("limiteCredito")
         .HasColumnType("decimal(15,2)")
-        .HasMaxLength(100)
-        .IsRequired();
+        .HasMaxLength(100);
     }
 }

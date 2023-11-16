@@ -21,11 +21,11 @@ namespace Persistencia.Data.Migrations
                 {
                     gama = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    descripcionTexto = table.Column<string>(type: "text", maxLength: 250, nullable: false)
+                    descripcionTexto = table.Column<string>(type: "text", maxLength: 250, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    descripcionHtml = table.Column<string>(type: "text", maxLength: 250, nullable: false)
+                    descripcionHtml = table.Column<string>(type: "text", maxLength: 250, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    imagen = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)
+                    imagen = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -44,7 +44,7 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pais = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    region = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    region = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     codigoPostal = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -52,7 +52,7 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     lineaDireccion1 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    lineaDireccion2 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    lineaDireccion2 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -105,11 +105,11 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Gama = table.Column<string>(type: "varchar(50)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    dimensiones = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
+                    dimensiones = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    proveedor = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    proveedor = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    descripcion = table.Column<string>(type: "text", maxLength: 250, nullable: false)
+                    descripcion = table.Column<string>(type: "text", maxLength: 250, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     cantidadStock = table.Column<short>(type: "smallint", maxLength: 6, nullable: false),
                     precioVenta = table.Column<decimal>(type: "decimal(15,2)", maxLength: 100, nullable: false),
@@ -136,7 +136,7 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     apellido1 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    apellido2 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    apellido2 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     extension = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -145,7 +145,7 @@ namespace Persistencia.Data.Migrations
                     CodigoOficina = table.Column<string>(type: "varchar(10)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CodigoJefe = table.Column<int>(type: "int", nullable: false),
-                    puesto = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    puesto = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -223,9 +223,9 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nombreCliente = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombreContacto = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    nombreContacto = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    apellidoContacto = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    apellidoContacto = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     telefono = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -233,15 +233,15 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     lineaDireccion1 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    lineaDireccion2 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    lineaDireccion2 = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ciudad = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    region = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    region = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    pais = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    pais = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    codigoPostal = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
+                    codigoPostal = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CodigoEmpleado = table.Column<int>(type: "int", nullable: false),
                     limiteCredito = table.Column<decimal>(type: "decimal(15,2)", maxLength: 100, nullable: false)
@@ -293,7 +293,7 @@ namespace Persistencia.Data.Migrations
                     fechaEntrega = table.Column<DateOnly>(type: "date", nullable: false),
                     estado = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    comentario = table.Column<string>(type: "text", maxLength: 250, nullable: false)
+                    comentario = table.Column<string>(type: "text", maxLength: 250, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CodigoCliente = table.Column<int>(type: "int", nullable: false)
                 },

@@ -30,8 +30,7 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
 
         builder.Property(p => p.FechaEntrega)
         .HasColumnName("fechaEntrega")
-        .HasColumnType("date")
-        .IsRequired();
+        .HasColumnType("date");
 
         builder.Property(p => p.Estado)
         .HasColumnName("estado")
@@ -42,8 +41,7 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
         builder.Property(p => p.Comentario)
         .HasColumnName("comentario")
         .HasColumnType("text")
-        .HasMaxLength(250)
-        .IsRequired();
+        .HasMaxLength(250);
 
         builder.HasOne(d => d.Cliente)
         .WithMany(d => d.Pedidos)

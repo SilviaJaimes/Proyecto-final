@@ -28,7 +28,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("Codigo");
 
                     b.Property<string>("ApellidoContacto")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar")
                         .HasColumnName("apellidoContacto");
@@ -43,7 +42,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CodigoPostal")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar")
                         .HasColumnName("codigoPostal");
@@ -66,7 +64,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("lineaDireccion1");
 
                     b.Property<string>("LineaDireccion2")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("lineaDireccion2");
@@ -78,19 +75,16 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("nombreCliente");
 
                     b.Property<string>("NombreContacto")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar")
                         .HasColumnName("nombreContacto");
 
                     b.Property<string>("Pais")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("pais");
 
                     b.Property<string>("Region")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("region");
@@ -159,7 +153,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("apellido1");
 
                     b.Property<string>("Apellido2")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("apellido2");
@@ -189,7 +182,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("nombre");
 
                     b.Property<string>("Puesto")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("puesto");
@@ -211,19 +203,16 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("gama");
 
                     b.Property<string>("DescripcionHtml")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("text")
                         .HasColumnName("descripcionHtml");
 
                     b.Property<string>("DescripcionTexto")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("text")
                         .HasColumnName("descripcionTexto");
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar")
                         .HasColumnName("imagen");
@@ -259,7 +248,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("lineaDireccion1");
 
                     b.Property<string>("LineaDireccion2")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("lineaDireccion2");
@@ -271,7 +259,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("pais");
 
                     b.Property<string>("Region")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("region");
@@ -331,7 +318,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comentario")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("text")
                         .HasColumnName("comentario");
@@ -374,13 +360,11 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("cantidadStock");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("text")
                         .HasColumnName("descripcion");
 
                     b.Property<string>("Dimensiones")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("varchar")
                         .HasColumnName("dimensiones");
@@ -405,7 +389,6 @@ namespace Persistencia.Data.Migrations
                         .HasColumnName("precioVenta");
 
                     b.Property<string>("Proveedor")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar")
                         .HasColumnName("proveedor");
