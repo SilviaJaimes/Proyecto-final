@@ -5,7 +5,7 @@ using Persistencia;
 
 namespace Aplicacion.Repository;
 
-public class DetallePedidoRepository : GenericRepository<DetallePedido>, IDetallePedido
+public class DetallePedidoRepository : GenericRepoStr<DetallePedido>, IDetallePedido
 {
     private readonly ApiContext _context;
 
@@ -20,7 +20,7 @@ public class DetallePedidoRepository : GenericRepository<DetallePedido>, IDetall
             .ToListAsync();
     }
 
-    public override async Task<DetallePedido> GetByIdAsync(int id)
+    public override async Task<DetallePedido> GetByIdAsync(string id)
     {
         return await _context.DetallePedidos
         .FirstOrDefaultAsync(p =>  p.Id == id);

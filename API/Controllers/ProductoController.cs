@@ -57,6 +57,17 @@ public class ProductoController : BaseApiController
         return new Pager<ProductoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
+    [HttpGet("consulta-9")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ProductosOrnamentalesYMás100Unidades()
+    {
+        var entidad = await unitofwork.Productos.ProductosOrnamentalesYMás100Unidades();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

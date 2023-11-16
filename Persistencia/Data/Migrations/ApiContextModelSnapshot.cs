@@ -104,20 +104,19 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("Dominio.Entities.DetallePedido", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("CodigoPedido")
                         .HasColumnType("int");
+
+                    b.Property<string>("CodigoProducto")
+                        .HasColumnType("varchar(15)");
 
                     b.Property<int>("Cantidad")
                         .HasMaxLength(11)
                         .HasColumnType("int")
                         .HasColumnName("cantidad");
 
-                    b.Property<int>("CodigoPedido")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CodigoProducto")
-                        .HasColumnType("varchar(15)");
+                    b.Property<string>("Id")
+                        .HasColumnType("longtext");
 
                     b.Property<short>("NumeroLinea")
                         .HasMaxLength(6)
@@ -129,9 +128,7 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("decimal(15,2)")
                         .HasColumnName("precioUnidad");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CodigoPedido");
+                    b.HasKey("CodigoPedido", "CodigoProducto");
 
                     b.HasIndex("CodigoProducto");
 
@@ -157,10 +154,11 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("apellido2");
 
-                    b.Property<int>("CodigoJefe")
+                    b.Property<int?>("CodigoJefe")
                         .HasColumnType("int");
 
                     b.Property<string>("CodigoOficina")
+                        .IsRequired()
                         .HasColumnType("varchar(10)");
 
                     b.Property<string>("Email")
@@ -328,7 +326,7 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("estado");
 
-                    b.Property<DateOnly>("FechaEntrega")
+                    b.Property<DateOnly?>("FechaEntrega")
                         .HasColumnType("date")
                         .HasColumnName("fechaEntrega");
 
@@ -510,7 +508,9 @@ namespace Persistencia.Data.Migrations
 
                     b.HasOne("Dominio.Entities.Producto", "Producto")
                         .WithMany("DetallePedidos")
-                        .HasForeignKey("CodigoProducto");
+                        .HasForeignKey("CodigoProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Pedido");
 
@@ -521,13 +521,13 @@ namespace Persistencia.Data.Migrations
                 {
                     b.HasOne("Dominio.Entities.Empleado", "Jefe")
                         .WithMany("Empleados")
-                        .HasForeignKey("CodigoJefe")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CodigoJefe");
 
                     b.HasOne("Dominio.Entities.Oficina", "Oficina")
                         .WithMany("Empleados")
-                        .HasForeignKey("CodigoOficina");
+                        .HasForeignKey("CodigoOficina")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Jefe");
 

@@ -57,6 +57,50 @@ public class PedidoController : BaseApiController
         return new Pager<PedidoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
+    [HttpGet("consulta-2")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> EstadosPedido()
+    {
+        var entidad = await unitofwork.Pedidos.EstadosPedido();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-4")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> SinEntregarATiempo()
+    {
+        var entidad = await unitofwork.Pedidos.SinEntregarATiempo();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-5")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> DosDiasAntesFechaEsperada()
+    {
+        var entidad = await unitofwork.Pedidos.DosDiasAntesFechaEsperada();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-6")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> PedidosEntregadosEnEnero()
+    {
+        var entidad = await unitofwork.Pedidos.PedidosEntregadosEnEnero();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -2,7 +2,7 @@ using Dominio.Entities;
 
 namespace Dominio.Interfaces;
 
-public interface IDetallePedido : IGenericRepository<DetallePedido>
+public interface IDetallePedido : IGenericRepoStr<DetallePedido>
 {
     
 }

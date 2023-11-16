@@ -14,6 +14,55 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         _context = context;
     }
 
+    //Consulta 1
+    public async Task<IEnumerable<Object>> ClientesEspañoles()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            where c.Pais == "Spain"
+            select new
+            {
+                NombreCliente = c.NombreCliente,
+                Telefono = c.Telefono,
+                Ciudad = c.Ciudad
+            }).ToListAsync();
+
+        return clientes;
+    }
+
+     //Consulta 3
+    public async Task<IEnumerable<Object>> Pago2008()
+    {
+        var pagos = await (
+            from p in _context.Pagos
+            join c in _context.Clientes on p.CodigoCliente equals c.Id
+            where p.FechaPago.Year == 2008
+            group p by p.CodigoCliente into Grupo
+            select new
+            {
+                CodigoCliente = Grupo.Key
+            }).ToListAsync();
+
+        return pagos;
+    }
+
+    //Consulta 10
+    public async Task<IEnumerable<Object>> ClientesMadridYRVConCodigo11O30()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            where c.Ciudad == "Madrid".ToLower() && c.CodigoEmpleado == 11 || c.CodigoEmpleado == 30
+            select new
+            {
+                NombreCliente = c.NombreCliente,
+                Telefono = c.Telefono,
+                Ciudad = c.Ciudad,
+                CodigoRepresentante =c.CodigoEmpleado
+            }).ToListAsync();
+
+        return clientes;
+    }
+
     public override async Task<IEnumerable<Cliente>> GetAllAsync()
     {
         return await _context.Clientes

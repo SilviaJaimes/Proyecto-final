@@ -37,7 +37,7 @@ public class DetallePedidoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<DetallePedidoDto>> Get(int id)
+    public async Task<ActionResult<DetallePedidoDto>> Get(string id)
     {
         var entidad = await unitofwork.DetallePedidos.GetByIdAsync(id);
         if (entidad == null){
@@ -91,7 +91,7 @@ public class DetallePedidoController : BaseApiController
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(int id){
+    public async Task<IActionResult> Delete(string id){
         var entidad = await unitofwork.DetallePedidos.GetByIdAsync(id);
         if(entidad == null)
         {

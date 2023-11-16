@@ -49,11 +49,13 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
 
         builder.HasOne(d => d.Oficina)
         .WithMany(d => d.Empleados)
-        .HasForeignKey(d => d.CodigoOficina);
+        .HasForeignKey(d => d.CodigoOficina)
+        .IsRequired();
 
         builder.HasOne(p => p.Jefe)        
         .WithMany(p => p.Empleados)         
-        .HasForeignKey(p => p.CodigoJefe);
+        .HasForeignKey(p => p.CodigoJefe)
+        .IsRequired(false);
 
         builder.Property(p => p.Puesto)
         .HasColumnName("puesto")

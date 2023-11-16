@@ -2,7 +2,7 @@ using Dominio.Entities;
 
 namespace API.Dtos;
 
-public class DetallePedidoDto : BaseEntity
+public class DetallePedidoDto : BaseEntityStr
 {
     public int CodigoPedido { get; set; }
     public PedidoDto Pedido { get; set; }

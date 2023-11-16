@@ -1,6 +1,6 @@
 namespace Dominio.Entities;
 
-public class DetallePedido : BaseEntity
+public class DetallePedido : BaseEntityStr
 {
     public int CodigoPedido { get; set; }
     public Pedido Pedido { get; set; }

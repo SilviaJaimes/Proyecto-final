@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistencia.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateMig : Migration
+    public partial class YourMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -142,9 +142,9 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CodigoOficina = table.Column<string>(type: "varchar(10)", nullable: true)
+                    CodigoOficina = table.Column<string>(type: "varchar(10)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CodigoJefe = table.Column<int>(type: "int", nullable: false),
+                    CodigoJefe = table.Column<int>(type: "int", nullable: true),
                     puesto = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -155,13 +155,13 @@ namespace Persistencia.Data.Migrations
                         name: "FK_empleado_empleado_CodigoJefe",
                         column: x => x.CodigoJefe,
                         principalTable: "empleado",
-                        principalColumn: "codigo",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "codigo");
                     table.ForeignKey(
                         name: "FK_empleado_oficina_CodigoOficina",
                         column: x => x.CodigoOficina,
                         principalTable: "oficina",
-                        principalColumn: "codigo");
+                        principalColumn: "codigo",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -290,7 +290,7 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     fechaPedido = table.Column<DateOnly>(type: "date", nullable: false),
                     fechaEsperada = table.Column<DateOnly>(type: "date", nullable: false),
-                    fechaEntrega = table.Column<DateOnly>(type: "date", nullable: false),
+                    fechaEntrega = table.Column<DateOnly>(type: "date", nullable: true),
                     estado = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     comentario = table.Column<string>(type: "text", maxLength: 250, nullable: true)
@@ -313,18 +313,18 @@ namespace Persistencia.Data.Migrations
                 name: "detallePedido",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CodigoPedido = table.Column<int>(type: "int", nullable: false),
-                    CodigoProducto = table.Column<string>(type: "varchar(15)", nullable: true)
+                    CodigoProducto = table.Column<string>(type: "varchar(15)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     cantidad = table.Column<int>(type: "int", maxLength: 11, nullable: false),
                     precioUnidad = table.Column<decimal>(type: "decimal(15,2)", maxLength: 100, nullable: false),
-                    numeroLinea = table.Column<short>(type: "smallint", maxLength: 6, nullable: false)
+                    numeroLinea = table.Column<short>(type: "smallint", maxLength: 6, nullable: false),
+                    Id = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_detallePedido", x => x.Id);
+                    table.PrimaryKey("PK_detallePedido", x => new { x.CodigoPedido, x.CodigoProducto });
                     table.ForeignKey(
                         name: "FK_detallePedido_pedido_CodigoPedido",
                         column: x => x.CodigoPedido,
@@ -335,7 +335,8 @@ namespace Persistencia.Data.Migrations
                         name: "FK_detallePedido_producto_CodigoProducto",
                         column: x => x.CodigoProducto,
                         principalTable: "producto",
-                        principalColumn: "codigo");
+                        principalColumn: "codigo",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -343,11 +344,6 @@ namespace Persistencia.Data.Migrations
                 name: "IX_cliente_CodigoEmpleado",
                 table: "cliente",
                 column: "CodigoEmpleado");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_detallePedido_CodigoPedido",
-                table: "detallePedido",
-                column: "CodigoPedido");
 
             migrationBuilder.CreateIndex(
                 name: "IX_detallePedido_CodigoProducto",

@@ -9,7 +9,7 @@ public class Empleado : BaseEntity
     public string Email { get; set; }
     public string CodigoOficina { get; set; }
     public Oficina Oficina { get; set; }
-    public int CodigoJefe { get; set; }
+    public int? CodigoJefe { get; set; }
     public Empleado Jefe { get; set; }
     public string Puesto { get; set; }
 

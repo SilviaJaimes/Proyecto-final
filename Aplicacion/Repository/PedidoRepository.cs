@@ -14,6 +14,70 @@ public class PedidoRepository : GenericRepository<Pedido>, IPedido
         _context = context;
     }
 
+    //Consulta 2
+    public async Task<IEnumerable<Object>> EstadosPedido()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            group p by p.Estado into Grupo
+            select new
+            {
+                Estado = Grupo.Key
+            }).ToListAsync();
+
+        return pedidos;
+    }
+
+    //Consulta 4
+    public async Task<IEnumerable<Object>> SinEntregarATiempo()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            where p.FechaEsperada < p.FechaEntrega
+            select new
+            {
+                CodigoPedido = p.Id,
+                CodigoCliente = p.CodigoCliente,
+                FechaEsperada = p.FechaEsperada,
+                FechaEntrega = p.FechaEntrega
+            }).ToListAsync();
+
+        return pedidos;
+    }
+
+    //Consulta 5
+    public async Task<IEnumerable<object>> DosDiasAntesFechaEsperada()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            where p.FechaEntrega.HasValue && (p.FechaEsperada.DayNumber - p.FechaEntrega.Value.DayNumber) >= 2
+            select new
+            {
+                CodigoPedido = p.Id,
+                CodigoCliente = p.CodigoCliente,
+                FechaEsperada = p.FechaEsperada,
+                FechaEntrega = p.FechaEntrega
+            }).ToListAsync();
+
+        return pedidos;
+    }
+
+    //Consulta 6
+    public async Task<IEnumerable<Object>> PedidosEntregadosEnEnero()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            where p.FechaEntrega.Value.Month == 01
+            select new
+            {
+                CodigoPedido = p.Id,
+                CodigoCliente = p.CodigoCliente,
+                FechaEntrega = p.FechaEntrega
+            }).ToListAsync();
+
+        return pedidos;
+    }
+
     public override async Task<IEnumerable<Pedido>> GetAllAsync()
     {
         return await _context.Pedidos

@@ -14,6 +14,23 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         _context = context;
     }
 
+    //Consulta 9
+    public async Task<IEnumerable<Object>> ProductosOrnamentalesYMás100Unidades()
+    {
+        var productos = await _context.Productos
+            .Where (p => p.Gama == "Ornamentales".ToLower() && p.CantidadStock >= 100)
+            .Select(p => new
+            {
+                Nombre = p.Nombre,
+                Descripcion = p.Descripcion,
+                Cantidad = p.CantidadStock,
+                PrecioVenta = p.PrecioVenta
+            }).OrderByDescending(pv => pv.PrecioVenta)
+            .ToListAsync();
+
+        return productos;
+    }
+
     public override async Task<IEnumerable<Producto>> GetAllAsync()
     {
         return await _context.Productos

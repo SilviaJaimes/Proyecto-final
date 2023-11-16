@@ -30,7 +30,8 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
 
         builder.Property(p => p.FechaEntrega)
         .HasColumnName("fechaEntrega")
-        .HasColumnType("date");
+        .HasColumnType("date")
+        .IsRequired(false);
 
         builder.Property(p => p.Estado)
         .HasColumnName("estado")

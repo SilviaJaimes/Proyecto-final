@@ -14,6 +14,34 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
         _context = context;
     }
 
+    //Consulta 7
+    public async Task<IEnumerable<Object>> PagosEn2008()
+    {
+        var pagos = await _context.Pagos
+            .Where (p => p.FechaPago.Year == 2008 && p.FormaPago == "PayPal".ToLower())
+            .Select(p => new
+            {
+                Total = p.Total
+            }).OrderByDescending(pa => pa.Total)
+            .ToListAsync();
+
+        return pagos;
+    }
+
+    //Consulta 8
+    public async Task<IEnumerable<Object>> FormasPago()
+    {
+        var pagos = await (
+            from p in _context.Pagos
+            group p by p.FormaPago into Grupo
+            select new
+            {
+                FormaPago = Grupo.Key
+            }).ToListAsync();
+
+        return pagos;
+    }
+
     public override async Task<IEnumerable<Pago>> GetAllAsync()
     {
         return await _context.Pagos

@@ -10,10 +10,7 @@ public class DetallePedidoConfiguration : IEntityTypeConfiguration<DetallePedido
     {
 
         builder.ToTable("detallePedido");
-        builder.HasKey(p => p.Id);
-        
-        builder.Property(p => p.Id)
-        .IsRequired();
+        builder.HasKey(d => new {d.CodigoPedido, d.CodigoProducto});
         
         builder.HasOne(d => d.Pedido)
         .WithMany(d => d.DetallePedidos)
