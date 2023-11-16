@@ -14,6 +14,8 @@ public class OficinaConfiguration : IEntityTypeConfiguration<Oficina>
         
         builder.Property(p => p.Id)
         .HasColumnName("codigo")
+        .HasColumnType("varchar")
+        .HasMaxLength(10)
         .IsRequired();
 
         builder.Property(p => p.Ciudad)

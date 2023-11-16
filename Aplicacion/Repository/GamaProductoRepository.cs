@@ -5,30 +5,30 @@ using Persistencia;
 
 namespace Aplicacion.Repository;
 
-public class RolRepository : GenericRepository<Rol>, IRol
+public class GamaProductoRepository : GenericRepoStr<GamaProducto>, IGamaProducto
 {
     private readonly ApiContext _context;
 
-    public RolRepository(ApiContext context) : base(context)
+    public GamaProductoRepository(ApiContext context) : base(context)
     {
         _context = context;
     }
 
-    public override async Task<IEnumerable<Rol>> GetAllAsync()
+    public override async Task<IEnumerable<GamaProducto>> GetAllAsync()
     {
-        return await _context.Roles
+        return await _context.GamaProductos
             .ToListAsync();
     }
 
-    public override async Task<Rol> GetByIdAsync(int id)
+    public override async Task<GamaProducto> GetByIdAsync(string id)
     {
-        return await _context.Roles
+        return await _context.GamaProductos
         .FirstOrDefaultAsync(p =>  p.Id == id);
     }
 
-    public override async Task<(int totalRegistros, IEnumerable<Rol> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
+    public override async Task<(int totalRegistros, IEnumerable<GamaProducto> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
     {
-        var query = _context.Roles as IQueryable<Rol>;
+        var query = _context.GamaProductos as IQueryable<GamaProducto>;
 
         if(!string.IsNullOrEmpty(search))
         {

@@ -14,6 +14,8 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
         
         builder.Property(p => p.Id)
         .HasColumnName("codigo")
+        .HasColumnType("int")
+        .HasMaxLength(11)
         .IsRequired();
 
         builder.Property(p => p.Nombre)

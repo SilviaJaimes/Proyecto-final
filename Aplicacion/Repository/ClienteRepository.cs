@@ -5,30 +5,30 @@ using Persistencia;
 
 namespace Aplicacion.Repository;
 
-public class RolRepository : GenericRepository<Rol>, IRol
+public class ClienteRepository : GenericRepository<Cliente>, ICliente
 {
     private readonly ApiContext _context;
 
-    public RolRepository(ApiContext context) : base(context)
+    public ClienteRepository(ApiContext context) : base(context)
     {
         _context = context;
     }
 
-    public override async Task<IEnumerable<Rol>> GetAllAsync()
+    public override async Task<IEnumerable<Cliente>> GetAllAsync()
     {
-        return await _context.Roles
+        return await _context.Clientes
             .ToListAsync();
     }
 
-    public override async Task<Rol> GetByIdAsync(int id)
+    public override async Task<Cliente> GetByIdAsync(int id)
     {
-        return await _context.Roles
+        return await _context.Clientes
         .FirstOrDefaultAsync(p =>  p.Id == id);
     }
 
-    public override async Task<(int totalRegistros, IEnumerable<Rol> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
+    public override async Task<(int totalRegistros, IEnumerable<Cliente> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
     {
-        var query = _context.Roles as IQueryable<Rol>;
+        var query = _context.Clientes as IQueryable<Cliente>;
 
         if(!string.IsNullOrEmpty(search))
         {

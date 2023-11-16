@@ -14,6 +14,8 @@ public class PagoConfiguration : IEntityTypeConfiguration<Pago>
         
         builder.Property(p => p.Id)
         .HasColumnName("idTransaccion")
+        .HasColumnType("varchar")
+        .HasMaxLength(50)
         .IsRequired();
 
         builder.HasOne(d => d.Cliente)

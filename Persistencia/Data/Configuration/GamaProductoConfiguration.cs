@@ -14,6 +14,8 @@ public class GamaProductoConfiguration : IEntityTypeConfiguration<GamaProducto>
         
         builder.Property(p => p.Id)
         .HasColumnName("gama")
+        .HasColumnType("varchar")
+        .HasMaxLength(50)
         .IsRequired();
 
         builder.Property(p => p.DescripcionTexto)

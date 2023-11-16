@@ -14,6 +14,8 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
         
         builder.Property(p => p.Id)
         .HasColumnName("codigo")
+        .HasColumnType("int")
+        .HasMaxLength(11)
         .IsRequired();
 
         builder.Property(p => p.FechaPedido)
