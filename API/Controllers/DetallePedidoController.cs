@@ -10,14 +10,14 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-[Authorize]
+/* [Authorize] */
 
-public class RolController : BaseApiController
+public class DetallePedidoController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
     private readonly  IMapper mapper;
 
-    public RolController( IUnitOfWork unitofwork, IMapper mapper)
+    public DetallePedidoController( IUnitOfWork unitofwork, IMapper mapper)
     {
         this.unitofwork = unitofwork;
         this.mapper = mapper;
@@ -27,43 +27,43 @@ public class RolController : BaseApiController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<RolDto>>> Get()
+    public async Task<ActionResult<IEnumerable<DetallePedidoDto>>> Get()
     {
-        var entidad = await unitofwork.Roles.GetAllAsync();
-        return mapper.Map<List<RolDto>>(entidad);
+        var entidad = await unitofwork.DetallePedidos.GetAllAsync();
+        return mapper.Map<List<DetallePedidoDto>>(entidad);
     }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<RolDto>> Get(int id)
+    public async Task<ActionResult<DetallePedidoDto>> Get(int id)
     {
-        var entidad = await unitofwork.Roles.GetByIdAsync(id);
+        var entidad = await unitofwork.DetallePedidos.GetByIdAsync(id);
         if (entidad == null){
             return NotFound();
         }
-        return this.mapper.Map<RolDto>(entidad);
+        return this.mapper.Map<DetallePedidoDto>(entidad);
     }
 
     [HttpGet]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<RolDto>>> GetPaginacion([FromQuery] Params rolParams)
+    public async Task<ActionResult<Pager<DetallePedidoDto>>> GetPaginacion([FromQuery] Params entidadParams)
     {
-        var entidad = await unitofwork.Roles.GetAllAsync(rolParams.PageIndex, rolParams.PageSize, rolParams.Search);
-        var listEntidad = mapper.Map<List<RolDto>>(entidad.registros);
-        return new Pager<RolDto>(listEntidad, entidad.totalRegistros, rolParams.PageIndex, rolParams.PageSize, rolParams.Search);
+        var entidad = await unitofwork.DetallePedidos.GetAllAsync(entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
+        var listEntidad = mapper.Map<List<DetallePedidoDto>>(entidad.registros);
+        return new Pager<DetallePedidoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Rol>> Post(RolDto entidadDto)
+    public async Task<ActionResult<DetallePedido>> Post(DetallePedidoDto entidadDto)
     {
-        var entidad = this.mapper.Map<Rol>(entidadDto);
-        this.unitofwork.Roles.Add(entidad);
+        var entidad = this.mapper.Map<DetallePedido>(entidadDto);
+        this.unitofwork.DetallePedidos.Add(entidad);
         await unitofwork.SaveAsync();
         if(entidad == null)
         {
@@ -77,13 +77,13 @@ public class RolController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<RolDto>> Put(int id, [FromBody]RolDto entidadDto){
+    public async Task<ActionResult<DetallePedidoDto>> Put(int id, [FromBody]DetallePedidoDto entidadDto){
         if(entidadDto == null)
         {
             return NotFound();
         }
-        var entidad = this.mapper.Map<Rol>(entidadDto);
-        unitofwork.Roles.Update(entidad);
+        var entidad = this.mapper.Map<DetallePedido>(entidadDto);
+        unitofwork.DetallePedidos.Update(entidad);
         await unitofwork.SaveAsync();
         return entidadDto;
     }
@@ -92,12 +92,12 @@ public class RolController : BaseApiController
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id){
-        var entidad = await unitofwork.Roles.GetByIdAsync(id);
+        var entidad = await unitofwork.DetallePedidos.GetByIdAsync(id);
         if(entidad == null)
         {
             return NotFound();
         }
-        unitofwork.Roles.Remove(entidad);
+        unitofwork.DetallePedidos.Remove(entidad);
         await unitofwork.SaveAsync();
         return NoContent();
     }
