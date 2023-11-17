@@ -14,6 +14,31 @@ public class GamaProductoRepository : GenericRepoStr<GamaProducto>, IGamaProduct
         _context = context;
     }
 
+    //Consulta 18
+    public async Task<IEnumerable<Object>> GamasPorCliente()
+    {
+        var gamas = await (
+            from c in _context.Clientes
+            select new
+            {
+                Cliente = c.NombreCliente,
+                Gamas = (
+                    from p in _context.Pedidos
+                    join dp in _context.DetallePedidos on p.Id equals dp.CodigoPedido
+                    join pr in _context.Productos on dp.CodigoProducto equals pr.Id
+                    join gp in _context.GamaProductos on pr.Gama equals gp.Id
+                    where p.CodigoCliente == c.Id
+                    select new
+                    {
+                        Nombre = gp.Id
+                    }
+                ).Distinct().ToList()
+            }
+        ).ToListAsync();
+
+        return gamas;
+    }
+
     public override async Task<IEnumerable<GamaProducto>> GetAllAsync()
     {
         return await _context.GamaProductos

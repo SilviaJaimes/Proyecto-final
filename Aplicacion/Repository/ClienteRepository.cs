@@ -185,21 +185,6 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 16
-    public async Task<IEnumerable<object>> EmpleadoConJefes()
-    {
-        var empleados = await (
-            from e in _context.Empleados
-            select new
-            {
-                NombreEmpleado = e.Nombre,
-                Jefe = e.Jefe.Nombre
-            }
-        ).ToListAsync();
-
-        return empleados;
-    }
-
     //Consulta 17
     public async Task<IEnumerable<object>> ClientesConPedidoTardio()
     {
@@ -211,6 +196,37 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
             select new
             {
                 NombreCliente = Grupo.First().NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 19
+    public async Task<IEnumerable<object>> ClientesSinPago()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            join p in _context.Pagos on c.Id equals p.CodigoCliente into GrupoPagos
+            where !GrupoPagos.Any()
+            select new
+            {
+                NombreCliente = c.NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 20
+    public async Task<IEnumerable<object>> ClientesSinPagoYSinPedido()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            where !_context.Pagos.Any(p => p.CodigoCliente == c.Id) && !_context.Pedidos.Any(pe => pe.CodigoCliente == c.Id)
+            select new
+            {
+                NombreCliente = c.NombreCliente
             }
         ).ToListAsync();
 

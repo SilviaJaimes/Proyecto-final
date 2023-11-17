@@ -14,6 +14,44 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         _context = context;
     }
 
+    //Consulta 16
+    public async Task<IEnumerable<object>> EmpleadoConJefes()
+    {
+        var empleados = await (
+            from e in _context.Empleados
+            select new
+            {
+                NombreEmpleado = e.Nombre,
+                Jefe = e.Jefe.Nombre
+            }
+        ).ToListAsync();
+
+        return empleados;
+    }
+
+    //Consulta 21
+    public async Task<IEnumerable<object>> EmpleadosSinClienteAsociado()
+    {
+        var empleados = await (
+            from e in _context.Empleados
+            join c in _context.Clientes on e.Id equals c.CodigoEmpleado into Grupo
+            where !Grupo.Any()
+            select new
+            {
+                NombreEmpleado = e.Nombre,
+                Oficina = (from o in _context.Oficinas
+                            where e.CodigoOficina == o.Id 
+                            select new {
+                                Codigo = o.Id,
+                                Ciudad = o.Ciudad,
+                                Telefono = o.Telefono
+                            }).ToList()
+            }
+        ).ToListAsync();
+
+        return empleados;
+    }
+
     public override async Task<IEnumerable<Empleado>> GetAllAsync()
     {
         return await _context.Empleados
