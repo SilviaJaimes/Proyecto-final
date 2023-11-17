@@ -31,6 +31,41 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         return productos;
     }
 
+    //Consulta 23
+    public async Task<IEnumerable<object>> ProductosSinPedido()
+    {
+        var productos = await (
+            from p in _context.Productos
+            join dp in _context.DetallePedidos on p.Id equals dp.CodigoProducto into Grupo
+            where !Grupo.Any()
+            select new
+            {
+                CodigoProducto = p.Id,
+                Nombre = p.Nombre
+            }
+        ).ToListAsync();
+
+        return productos;
+    }
+
+    //Consulta 24
+    public async Task<IEnumerable<object>> ProductosSinPedidoDescripcion()
+    {
+        var productos = await (
+            from p in _context.Productos
+            join dp in _context.DetallePedidos on p.Id equals dp.CodigoProducto into Grupo
+            where !Grupo.Any()
+            select new
+            {
+                Nombre = p.Nombre,
+                Descripcion = p.Descripcion,
+                Imagen = p.GamaProducto.Imagen
+            }
+        ).ToListAsync();
+
+        return productos;
+    }
+
     public override async Task<IEnumerable<Producto>> GetAllAsync()
     {
         return await _context.Productos

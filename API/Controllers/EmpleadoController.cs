@@ -79,6 +79,17 @@ public class EmpleadoController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-22")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> EmpleadoSinClienteYSinOficina()
+    {
+        var entidad = await unitofwork.Empleados.EmpleadoSinClienteYSinOficina();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

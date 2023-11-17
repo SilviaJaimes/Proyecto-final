@@ -52,6 +52,23 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         return empleados;
     }
 
+    //Consulta 22
+    public async Task<IEnumerable<object>> EmpleadoSinClienteYSinOficina()
+    {
+        var empleados = await (
+            from e in _context.Empleados
+            join c in _context.Clientes on e.Id equals c.CodigoEmpleado into Grupo
+            where !Grupo.Any() || e.CodigoOficina == null
+            select new
+            {
+                Id = e.Id,
+                NombreEmpleado = e.Nombre
+            }
+        ).ToListAsync();
+
+        return empleados;
+    }
+
     public override async Task<IEnumerable<Empleado>> GetAllAsync()
     {
         return await _context.Empleados
