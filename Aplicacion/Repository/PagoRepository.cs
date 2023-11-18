@@ -14,7 +14,7 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
         _context = context;
     }
 
-    //Consulta 7
+    //Consulta 8
     public async Task<IEnumerable<Object>> PagosEn2008()
     {
         var pagos = await _context.Pagos
@@ -28,7 +28,7 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
         return pagos;
     }
 
-    //Consulta 8
+    //Consulta 9
     public async Task<IEnumerable<Object>> FormasPago()
     {
         var pagos = await (
@@ -38,6 +38,18 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
             {
                 FormaPago = Grupo.Key
             }).ToListAsync();
+
+        return pagos;
+    }
+
+    //Consulta 31
+    public async Task<decimal> PagoMedio2009()
+    {
+        var pagos = await (
+            from p in _context.Pagos
+            where p.FechaPago.Year == 2009
+            select p.Total
+            ).AverageAsync();
 
         return pagos;
     }

@@ -11,7 +11,7 @@ using Persistencia;
 namespace Persistencia.Data.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20231116200119_YourMigration")]
+    [Migration("20231118022619_YourMigration")]
     partial class YourMigration
     {
         /// <inheritdoc />
@@ -41,7 +41,7 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("ciudad");
 
-                    b.Property<int>("CodigoEmpleado")
+                    b.Property<int?>("CodigoEmpleado")
                         .HasColumnType("int");
 
                     b.Property<string>("CodigoPostal")
@@ -494,9 +494,7 @@ namespace Persistencia.Data.Migrations
                 {
                     b.HasOne("Dominio.Entities.Empleado", "Empleado")
                         .WithMany("Clientes")
-                        .HasForeignKey("CodigoEmpleado")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CodigoEmpleado");
 
                     b.Navigation("Empleado");
                 });

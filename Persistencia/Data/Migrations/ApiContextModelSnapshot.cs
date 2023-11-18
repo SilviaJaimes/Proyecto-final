@@ -38,7 +38,7 @@ namespace Persistencia.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("ciudad");
 
-                    b.Property<int>("CodigoEmpleado")
+                    b.Property<int?>("CodigoEmpleado")
                         .HasColumnType("int");
 
                     b.Property<string>("CodigoPostal")
@@ -491,9 +491,7 @@ namespace Persistencia.Data.Migrations
                 {
                     b.HasOne("Dominio.Entities.Empleado", "Empleado")
                         .WithMany("Clientes")
-                        .HasForeignKey("CodigoEmpleado")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CodigoEmpleado");
 
                     b.Navigation("Empleado");
                 });

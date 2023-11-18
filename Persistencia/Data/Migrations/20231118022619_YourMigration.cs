@@ -243,7 +243,7 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     codigoPostal = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CodigoEmpleado = table.Column<int>(type: "int", nullable: false),
+                    CodigoEmpleado = table.Column<int>(type: "int", nullable: true),
                     limiteCredito = table.Column<decimal>(type: "decimal(15,2)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -253,8 +253,7 @@ namespace Persistencia.Data.Migrations
                         name: "FK_cliente_empleado_CodigoEmpleado",
                         column: x => x.CodigoEmpleado,
                         principalTable: "empleado",
-                        principalColumn: "codigo",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "codigo");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

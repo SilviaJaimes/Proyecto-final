@@ -14,6 +14,25 @@ public class OficinaRepository : GenericRepoStr<Oficina>, IOficina
         _context = context;
     }
 
+    //Consulta 26
+    public async Task<IEnumerable<object>> OficinaSinEmpleadoRepresentante()
+    {
+        var oficinas = await (
+            from o in _context.Oficinas
+            where !_context.Empleados.Any(e => _context.Clientes
+                .Where(c => c.CodigoEmpleado == e.Id)
+                .Any(c => c.Pedidos
+                    .Any(p => p.DetallePedidos
+                        .Any(dp => dp.Producto.GamaProducto.Id == "Frutales"))))
+            select new
+            {
+                Oficina = o.Id
+            }
+        ).ToListAsync();
+
+        return oficinas;
+    }
+
     public override async Task<IEnumerable<Oficina>> GetAllAsync()
     {
         return await _context.Oficinas

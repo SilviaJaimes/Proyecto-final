@@ -14,7 +14,7 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         _context = context;
     }
 
-    //Consulta 9
+    //Consulta 10
     public async Task<IEnumerable<Object>> ProductosOrnamentalesYMás100Unidades()
     {
         var productos = await _context.Productos
@@ -31,7 +31,7 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         return productos;
     }
 
-    //Consulta 23
+    //Consulta 24
     public async Task<IEnumerable<object>> ProductosSinPedido()
     {
         var productos = await (
@@ -48,7 +48,7 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         return productos;
     }
 
-    //Consulta 24
+    //Consulta 25
     public async Task<IEnumerable<object>> ProductosSinPedidoDescripcion()
     {
         var productos = await (

@@ -14,7 +14,7 @@ public class GamaProductoRepository : GenericRepoStr<GamaProducto>, IGamaProduct
         _context = context;
     }
 
-    //Consulta 18
+    //Consulta 19
     public async Task<IEnumerable<Object>> GamasPorCliente()
     {
         var gamas = await (

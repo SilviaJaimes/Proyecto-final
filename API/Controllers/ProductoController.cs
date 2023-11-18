@@ -57,7 +57,7 @@ public class ProductoController : BaseApiController
         return new Pager<ProductoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
-    [HttpGet("consulta-9")]
+    [HttpGet("consulta-10")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,7 +68,7 @@ public class ProductoController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-23")]
+    [HttpGet("consulta-24")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -79,7 +79,7 @@ public class ProductoController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-24")]
+    [HttpGet("consulta-25")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

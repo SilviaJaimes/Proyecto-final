@@ -79,7 +79,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-10")]
+    [HttpGet("consulta-11")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,7 +90,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-11")]
+    [HttpGet("consulta-12")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -101,7 +101,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-12")]
+    [HttpGet("consulta-13")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -112,7 +112,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-13")]
+    [HttpGet("consulta-14")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -123,7 +123,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-14")]
+    [HttpGet("consulta-15")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -134,7 +134,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-15")]
+    [HttpGet("consulta-16")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -145,7 +145,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-17")]
+    [HttpGet("consulta-18")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -156,7 +156,7 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-19")]
+    [HttpGet("consulta-20")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -167,13 +167,79 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-20")]
+    [HttpGet("consulta-21")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> ClientesSinPagoYSinPedido()
     {
         var entidad = await unitofwork.Clientes.ClientesSinPagoYSinPedido();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-27")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ClientesConPedidoYSinPago()
+    {
+        var entidad = await unitofwork.Clientes.ClientesConPedidoYSinPago();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-30")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> TotalClientesPorPais()
+    {
+        var entidad = await unitofwork.Clientes.TotalClientesPorPais();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-33")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ClientesEnMadrid()
+    {
+        var entidad = await unitofwork.Clientes.ClientesEnMadrid();
+        var dto = mapper.Map<int>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-34")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ClientesPorCiudadM()
+    {
+        var entidad = await unitofwork.Clientes.ClientesPorCiudadM();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-36")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ClientesSinRepresentante()
+    {
+        var entidad = await unitofwork.Clientes.ClientesSinRepresentante();
+        var dto = mapper.Map<int>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-37")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> PrimerYUltimoPagoPorCliente()
+    {
+        var entidad = await unitofwork.Clientes.PrimerYUltimoPagoPorCliente();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
     }

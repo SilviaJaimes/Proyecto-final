@@ -57,7 +57,7 @@ public class PagoController : BaseApiController
         return new Pager<PagoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
-    [HttpGet("consulta-7")]
+    [HttpGet("consulta-8")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,7 +68,7 @@ public class PagoController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-8")]
+    [HttpGet("consulta-9")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,6 +76,17 @@ public class PagoController : BaseApiController
     {
         var entidad = await unitofwork.Pagos.FormasPago();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-31")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> PagoMedio2009()
+    {
+        var entidad = await unitofwork.Pagos.PagoMedio2009();
+        var dto = mapper.Map<decimal>(entidad);
         return Ok(dto);
     }
 

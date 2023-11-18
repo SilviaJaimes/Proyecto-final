@@ -15,4 +15,10 @@ public interface ICliente : IGenericRepository<Cliente>
     Task<IEnumerable<object>> ClientesConPedidoTardio();
     Task<IEnumerable<object>> ClientesSinPago();
     Task<IEnumerable<object>> ClientesSinPagoYSinPedido();
+    Task<IEnumerable<object>> ClientesConPedidoYSinPago();
+    Task<IEnumerable<object>> TotalClientesPorPais();
+    Task<int> ClientesEnMadrid();
+    Task<IEnumerable<object>> ClientesPorCiudadM();
+    Task<int> ClientesSinRepresentante();
+    Task<IEnumerable<object>> PrimerYUltimoPagoPorCliente();
 }

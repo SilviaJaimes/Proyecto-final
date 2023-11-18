@@ -57,7 +57,7 @@ public class GamaProductoController : BaseApiController
         return new Pager<GamaProductoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
-    [HttpGet("consulta-18")]
+    [HttpGet("consulta-19")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

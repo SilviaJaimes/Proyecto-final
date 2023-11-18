@@ -94,9 +94,42 @@ public class PedidoController : BaseApiController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> PedidosRechazadosEn2009()
+    {
+        var entidad = await unitofwork.Pedidos.PedidosRechazadosEn2009();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-7")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> PedidosEntregadosEnEnero()
     {
         var entidad = await unitofwork.Pedidos.PedidosEntregadosEnEnero();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-32")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> PedidosPorEstado()
+    {
+        var entidad = await unitofwork.Pedidos.PedidosPorEstado();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-38")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ProductosDiferentesPorPedido()
+    {
+        var entidad = await unitofwork.Pedidos.ProductosDiferentesPorPedido();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
     }

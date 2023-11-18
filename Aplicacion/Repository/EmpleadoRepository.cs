@@ -14,7 +14,7 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         _context = context;
     }
 
-    //Consulta 16
+    //Consulta 17
     public async Task<IEnumerable<object>> EmpleadoConJefes()
     {
         var empleados = await (
@@ -29,7 +29,7 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         return empleados;
     }
 
-    //Consulta 21
+    //Consulta 22
     public async Task<IEnumerable<object>> EmpleadosSinClienteAsociado()
     {
         var empleados = await (
@@ -52,7 +52,7 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         return empleados;
     }
 
-    //Consulta 22
+    //Consulta 23
     public async Task<IEnumerable<object>> EmpleadoSinClienteYSinOficina()
     {
         var empleados = await (
@@ -67,6 +67,49 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         ).ToListAsync();
 
         return empleados;
+    }
+
+    //Consulta 28
+    public async Task<IEnumerable<object>> EmpleadoSinCliente()
+    {
+        var empleados = await (
+            from e in _context.Empleados
+            join c in _context.Clientes on e.Id equals c.CodigoEmpleado into Grupo
+            where !Grupo.Any()
+            select new
+            {
+                NombreEmpleado = e.Nombre,
+                JefeAsociado = e.Jefe.Nombre
+            }
+        ).ToListAsync();
+
+        return empleados;
+    }
+
+    //Consulta 29
+    public async Task<int> TotalEmpleados()
+    {
+        int totalEmpleados = await _context.Empleados
+            .CountAsync();
+
+        return totalEmpleados;
+    }
+
+    //Consulta 35
+    public async Task<IEnumerable<object>> RepresentanteVentasConCantidadClientes()
+    {
+        var representantes = await (
+            from e in _context.Empleados
+            where e.Puesto.ToLower().Contains("Representante Ventas")
+            join c in _context.Clientes on e.Id equals c.CodigoEmpleado into Grupo
+            select new
+            {
+                RepresentateDeVentas = e.Nombre,
+                CantidadClientes = Grupo.Count()
+            }
+        ).ToListAsync();
+
+        return representantes;
     }
 
     public override async Task<IEnumerable<Empleado>> GetAllAsync()

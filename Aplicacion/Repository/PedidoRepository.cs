@@ -1,3 +1,4 @@
+using System.Runtime.Intrinsics.Arm;
 using Dominio.Entities;
 using Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,21 @@ public class PedidoRepository : GenericRepository<Pedido>, IPedido
     }
 
     //Consulta 6
+    public async Task<IEnumerable<Object>> PedidosRechazadosEn2009()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            where p.Estado == "Rechazado".ToLower() && p.FechaPedido.Year == 2009
+            select new
+            {
+                CodigoPedido = p.Id,
+                FechaPedido = p.FechaPedido
+            }).ToListAsync();
+
+        return pedidos;
+    }
+
+    //Consulta 7
     public async Task<IEnumerable<Object>> PedidosEntregadosEnEnero()
     {
         var pedidos = await (
@@ -77,6 +93,41 @@ public class PedidoRepository : GenericRepository<Pedido>, IPedido
 
         return pedidos;
     }
+
+    //Consulta 32
+    public async Task<IEnumerable<object>> PedidosPorEstado()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            group p by p.Estado into GrupoEstado
+            select new
+            {
+                Estado = GrupoEstado.Key,
+                CantidadPedidos = GrupoEstado.Count()
+            }
+        ).OrderByDescending(cp => cp.CantidadPedidos)
+        .ToListAsync();
+
+        return pedidos;
+    }
+
+    //Consulta 38
+    public async Task<IEnumerable<object>> ProductosDiferentesPorPedido()
+{
+    var productos = await (
+        from dp in _context.DetallePedidos
+        join p in _context.Pedidos on dp.CodigoPedido equals p.Id
+        group dp.CodigoProducto by p into grupo
+        select new
+        {
+            Pedido = grupo.Key,
+            Productos = grupo.Distinct().ToList()
+        }
+    ).ToListAsync();
+
+    return productos;
+}
+
 
     public override async Task<IEnumerable<Pedido>> GetAllAsync()
     {

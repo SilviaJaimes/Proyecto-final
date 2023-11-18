@@ -80,7 +80,8 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
 
         builder.HasOne(d => d.Empleado)
         .WithMany(d => d.Clientes)
-        .HasForeignKey(d => d.CodigoEmpleado);
+        .HasForeignKey(d => d.CodigoEmpleado)
+        .IsRequired(false);
 
         builder.Property(p => p.LimiteCredito)
         .HasColumnName("limiteCredito")

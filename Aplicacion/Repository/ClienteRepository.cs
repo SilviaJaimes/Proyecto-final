@@ -46,7 +46,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return pagos;
     }
 
-    //Consulta 10
+    //Consulta 11
     public async Task<IEnumerable<Object>> ClientesMadridYRVConCodigo11O30()
     {
         var clientes = await (
@@ -63,7 +63,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 11
+    //Consulta 12
     public async Task<IEnumerable<object>> ClienteConSuRepresentante()
     {
         var clientes = await (
@@ -86,7 +86,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 12
+    //Consulta 13
     public async Task<IEnumerable<object>> ClientesConPagos()
     {
         var clientes = await (
@@ -111,7 +111,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 13
+    //Consulta 14
     public async Task<IEnumerable<object>> ClientesSinPagos()
     {
         var clientesSinPagos = await (
@@ -135,7 +135,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientesSinPagos;
     }
 
-    //Consulta 14
+    //Consulta 15
     public async Task<IEnumerable<object>> ClientesConPagosRepresentanteYOficina()
     {
         var clientes = await (
@@ -160,7 +160,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 15
+    //Consulta 16
     public async Task<IEnumerable<object>> ClientesSinPagosRepresentanteYOficina()
     {
         var clientes = await (
@@ -185,7 +185,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 17
+    //Consulta 18
     public async Task<IEnumerable<object>> ClientesConPedidoTardio()
     {
         var clientes = await (
@@ -202,7 +202,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 19
+    //Consulta 20
     public async Task<IEnumerable<object>> ClientesSinPago()
     {
         var clientes = await (
@@ -218,7 +218,7 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
-    //Consulta 20
+    //Consulta 21
     public async Task<IEnumerable<object>> ClientesSinPagoYSinPedido()
     {
         var clientes = await (
@@ -231,6 +231,92 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         ).ToListAsync();
 
         return clientes;
+    }
+
+    //Consulta 27
+    public async Task<IEnumerable<object>> ClientesConPedidoYSinPago()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            where _context.Pedidos.Any(p => p.CodigoCliente == c.Id) && !_context.Pagos.Any(pe => pe.CodigoCliente == c.Id)
+            select new
+            {
+                Id = c.Id,
+                NombreCliente = c.NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 30
+    public async Task<IEnumerable<object>> TotalClientesPorPais()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            group c by c.Pais into grupo
+            select new
+            {
+                Pais = grupo.Key,
+                CantidadClientes = grupo.Count()
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 33
+    public async Task<int> ClientesEnMadrid()
+    {
+        var clientes = await _context.Clientes
+            .Where(c => c.Ciudad == "Madrid")
+            .CountAsync();
+
+        return clientes;
+    }
+
+    //Consulta 34
+    public async Task<IEnumerable<object>> ClientesPorCiudadM()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            where c.Ciudad.StartsWith("M") || c.Ciudad.StartsWith("m")
+            group c by c.Ciudad into grupo
+            select new
+            {
+                Ciudad = grupo.Key,
+                CantidadClientes = grupo.Count()
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 36
+    public async Task<int> ClientesSinRepresentante()
+    {
+        var clientes = await _context.Clientes
+            .Where(r => r.CodigoEmpleado == null)
+            .CountAsync();
+
+        return clientes;
+    }
+
+    //Consulta 37
+    public async Task<IEnumerable<object>> PrimerYUltimoPagoPorCliente()
+    {
+        var pagos = await (
+            from c in _context.Clientes
+            join pago in _context.Pagos on c.Id equals pago.CodigoCliente into Grupo
+            select new
+            {
+                Cliente = c.NombreCliente,
+                PrimerPago = Grupo.Min(p => (DateOnly?)p.FechaPago),
+                UltimoPago = Grupo.Max(p => (DateOnly?)p.FechaPago)
+            }
+        ).ToListAsync();
+
+        return pagos;
     }
 
     public override async Task<IEnumerable<Cliente>> GetAllAsync()

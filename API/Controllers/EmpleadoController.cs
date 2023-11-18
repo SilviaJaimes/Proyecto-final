@@ -57,7 +57,7 @@ public class EmpleadoController : BaseApiController
         return new Pager<EmpleadoDto>(listEntidad, entidad.totalRegistros, entidadParams.PageIndex, entidadParams.PageSize, entidadParams.Search);
     }
 
-    [HttpGet("consulta-16")]
+    [HttpGet("consulta-17")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,7 +68,7 @@ public class EmpleadoController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-21")]
+    [HttpGet("consulta-22")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -79,13 +79,46 @@ public class EmpleadoController : BaseApiController
         return Ok(dto);
     }
 
-    [HttpGet("consulta-22")]
+    [HttpGet("consulta-23")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> EmpleadoSinClienteYSinOficina()
     {
         var entidad = await unitofwork.Empleados.EmpleadoSinClienteYSinOficina();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-28")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> EmpleadoSinCliente()
+    {
+        var entidad = await unitofwork.Empleados.EmpleadoSinCliente();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-29")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> TotalEmpleados()
+    {
+        var entidad = await unitofwork.Empleados.TotalEmpleados();
+        var dto = mapper.Map<int>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-35")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> RepresentanteVentasConCantidadClientes()
+    {
+        var entidad = await unitofwork.Empleados.RepresentanteVentasConCantidadClientes();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
     }
