@@ -83,6 +83,11 @@ Eliminar Usuario: DELETE `http://localhost:5033/api/usuario/{id}`
 
 Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin paginación. Estos son los siguientes:
 
+**6.** Devuelve un listado de todos los pedidos que fueron rechazados en 2009.  
+**12.** Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.  
+**31.** ¿Cuál fue el pago medio en 2009?  
+**40.** Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.  
+**57.** Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.  
 
 
 Para consultar la versión 1.0 de todos se ingresa únicamente el Endpoint; para consultar la versión 1.1 se deben seguir los siguientes pasos: 
@@ -104,422 +109,422 @@ Método: `GET`
 
 #### 2. Devuelve un listado con los distintos estados por los que puede pasar un pedido: 
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-2`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-2`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
 #### 3. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-3`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-3`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**4. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo:**  
+#### 4. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-4`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-4`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**5. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada:**  
+#### 5. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-5`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-5`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**6. Devuelve un listado de todos los pedidos que fueron rechazados en 2009:**  
+#### 6. Devuelve un listado de todos los pedidos que fueron rechazados en 2009:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-6`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-6`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**7. Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año:**  
+#### 7. Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-7`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-7`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**8. Devuelve un listado con todos los pagos que se realizaron en el año 2008 mediante Paypal. Ordene el resultado de mayor a menor:**  
+#### 8. Devuelve un listado con todos los pagos que se realizaron en el año 2008 mediante Paypal. Ordene el resultado de mayor a menor:  
 
-**Endpoint**: `http://localhost:5033/api/pago/consulta-8`  
+Endpoint: `http://localhost:5033/api/pago/consulta-8`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**9.  Devuelve un listado con todas las formas de pago que aparecen en la tabla pago. Tenga en cuenta que no deben aparecer formas de pago repetidas:**  
+#### 9.  Devuelve un listado con todas las formas de pago que aparecen en la tabla pago. Tenga en cuenta que no deben aparecer formas de pago repetidas:  
 
-**Endpoint**: `http://localhost:5033/api/pago/consulta-9`  
+Endpoint: `http://localhost:5033/api/pago/consulta-9`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**10. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio:**  
+#### 10. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-10`  
+Endpoint: `http://localhost:5033/api/producto/consulta-10`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**11. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30:**  
+#### 11. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-11`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-11`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**12. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas:**  
+#### 12. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-12`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-12`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**13. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas:**  
+#### 13. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-13`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-13`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**14. Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas:**  
+#### 14. Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-14`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-14`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**15. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante:**  
+#### 15. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-15`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-15`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**16. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante:**  
+#### 16. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-16`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-16`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**17. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe:**  
+#### 17. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-17`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-17`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**18. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido:**  
+#### 18. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-18`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-18`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**19. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente:**  
+#### 19. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente:  
 
-**Endpoint**: `http://localhost:5033/api/gamaProducto/consulta-19`  
+Endpoint: `http://localhost:5033/api/gamaProducto/consulta-19`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**20. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago:**  
+#### 20. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-20`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-20`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**21. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido:**  
+#### 21. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-21`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-21`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**22. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan:**  
+#### 22. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-22`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-22`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**23. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado:**  
+#### 23. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-23`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-23`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**24. Devuelve un listado de los productos que nunca han aparecido en un pedido:**  
+#### 24. Devuelve un listado de los productos que nunca han aparecido en un pedido:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-24`  
+Endpoint: `http://localhost:5033/api/producto/consulta-24`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**25. Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto:**  
+#### 25. Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-25`  
+Endpoint: `http://localhost:5033/api/producto/consulta-25`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**26. Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales:**  
+#### 26. Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales:  
 
-**Endpoint**: `http://localhost:5033/api/oficina/consulta-26`  
+Endpoint: `http://localhost:5033/api/oficina/consulta-26`  
 
-**Método**: `GET` 
+Método: `GET` 
 
 
-**27. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago:**  
+#### 27. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-27`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-27`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**28. Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado:**  
+#### 28. Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-28`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-28`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**29. ¿Cuántos empleados hay en la compañía?:**  
+#### 29. ¿Cuántos empleados hay en la compañía?:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-29`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-29`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**30. ¿Cuántos clientes tiene cada país?:**  
+#### 30. ¿Cuántos clientes tiene cada país?:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-30`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-30`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**31. ¿Cuál fue el pago medio en 2009?:**  
+#### 31. ¿Cuál fue el pago medio en 2009?:  
 
-**Endpoint**: `http://localhost:5033/api/pago/consulta-31`  
+Endpoint: `http://localhost:5033/api/pago/consulta-31`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**32. ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma descendente por el número de pedidos:**  
+#### 32. ¿Cuántos pedidos hay en cada estado? Ordena el resultado de forma descendente por el número de pedidos:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-32`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-32`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**33. ¿Cuántos clientes existen con domicilio en la ciudad de Madrid?:**  
+#### 33. ¿Cuántos clientes existen con domicilio en la ciudad de Madrid?:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-33`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-33`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**34. ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por M?:**  
+#### 34. ¿Calcula cuántos clientes tiene cada una de las ciudades que empiezan por M?:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-34`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-34`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**35. Devuelve el nombre de los representantes de ventas y el número de clientes al que atiende cada uno:**  
+#### 35. Devuelve el nombre de los representantes de ventas y el número de clientes al que atiende cada uno:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-35`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-35`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**36. Calcula el número de clientes que no tiene asignado representante de ventas:**  
+#### 36. Calcula el número de clientes que no tiene asignado representante de ventas:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-36`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-36`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**37. Calcula la fecha del primer y último pago realizado por cada uno de los clientes. El listado deberá mostrar el nombre y los apellidos de cada cliente:**  
+#### 37. Calcula la fecha del primer y último pago realizado por cada uno de los clientes. El listado deberá mostrar el nombre y los apellidos de cada cliente:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-37`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-37`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**38. Calcula el número de productos diferentes que hay en cada uno de los pedidos:**  
+#### 38. Calcula el número de productos diferentes que hay en cada uno de los pedidos:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-38`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-38`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**39. Calcula la suma de la cantidad total de todos los productos que aparecen en cada uno de los pedidos:**  
+#### 39. Calcula la suma de la cantidad total de todos los productos que aparecen en cada uno de los pedidos:  
 
-**Endpoint**: `http://localhost:5033/api/pedido/consulta-39`  
+Endpoint: `http://localhost:5033/api/pedido/consulta-39`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**40. Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas:**  
+#### 40. Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-40`  
+Endpoint: `http://localhost:5033/api/producto/consulta-40`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**41. La misma información que en la pregunta anterior, pero agrupada por código de producto:**  
+#### 41. La misma información que en la pregunta anterior, pero agrupada por código de producto:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-41`  
+Endpoint: `http://localhost:5033/api/producto/consulta-41`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**42. La misma información que en la pregunta anterior, pero agrupada por código de producto filtrada por los códigos que empiecen por OR:**  
+#### 42. La misma información que en la pregunta anterior, pero agrupada por código de producto filtrada por los códigos que empiecen por OR:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-42`  
+Endpoint: `http://localhost:5033/api/producto/consulta-42`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**43. Lista las ventas totales de los productos que hayan facturado más de 3000 euros. Se mostrará el nombre, unidades vendidas, total facturado y total facturado con impuestos (21% IVA):**  
+#### 43. Lista las ventas totales de los productos que hayan facturado más de 3000 euros. Se mostrará el nombre, unidades vendidas, total facturado y total facturado con impuestos (21% IVA):  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-43`  
+Endpoint: `http://localhost:5033/api/producto/consulta-43`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**44. Muestre la suma total de todos los pagos que se realizaron para cada uno de los años que aparecen en la tabla pagos:**  
+#### 44. Muestre la suma total de todos los pagos que se realizaron para cada uno de los años que aparecen en la tabla pagos:  
 
-**Endpoint**: `http://localhost:5033/api/pago/consulta-44`  
+Endpoint: `http://localhost:5033/api/pago/consulta-44`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**45. Devuelve el nombre del cliente con mayor límite de crédito:**  
+#### 45. Devuelve el nombre del cliente con mayor límite de crédito:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-45`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-45`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**46. Devuelve el nombre del producto que tenga el precio de venta más caro:**  
+#### 46. Devuelve el nombre del producto que tenga el precio de venta más caro:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-46`  
+Endpoint: `http://localhost:5033/api/producto/consulta-46`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**47. Devuelve el nombre del producto del que se han vendido más unidades:**  
+#### 47. Devuelve el nombre del producto del que se han vendido más unidades:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-47`  
+Endpoint: `http://localhost:5033/api/producto/consulta-47`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**48. Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado:**  
+#### 48. Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-48`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-48`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**49. Devuelve el nombre del cliente con mayor límite de crédito:**  
+#### 49. Devuelve el nombre del cliente con mayor límite de crédito:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-49`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-49`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**50. Devuelve el nombre del producto que tenga el precio de venta más caro:**  
+#### 50. Devuelve el nombre del producto que tenga el precio de venta más caro:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-50`  
+Endpoint: `http://localhost:5033/api/producto/consulta-50`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**51. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago:**  
+#### 51. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-51`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-51`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**52. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago:**  
+#### 52. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-52`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-52`  
 
-**Método**: `GET` 
+Método: `GET` 
 
 
-**53. Devuelve un listado de los productos que nunca han aparecido en un pedido:**  
+#### 53. Devuelve un listado de los productos que nunca han aparecido en un pedido:  
 
-**Endpoint**: `http://localhost:5033/api/producto/consulta-53`  
+Endpoint: `http://localhost:5033/api/producto/consulta-53`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**54. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente:**  
+#### 54. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-54`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-54`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**55. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago:**  
+#### 55. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-55`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-55`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**56. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago:**  
+#### 56. Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-56`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-56`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**57. Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido:**  
+#### 57. Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-57`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-57`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**58. Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfabéticamente de menor a mayor:**  
+#### 58. Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfabéticamente de menor a mayor:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-58`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-58`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**59. Devuelve el nombre del cliente, el nombre y primer apellido de su representante de ventas y el número de teléfono de la oficina del representante de ventas, de aquellos clientes que no hayan realizado ningún pago:**  
+#### 59. Devuelve el nombre del cliente, el nombre y primer apellido de su representante de ventas y el número de teléfono de la oficina del representante de ventas, de aquellos clientes que no hayan realizado ningún pago:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-59`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-59`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**60. Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y primer apellido de su representante de ventas y la ciudad donde está su oficina:**  
+#### 60. Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y primer apellido de su representante de ventas y la ciudad donde está su oficina:  
 
-**Endpoint**: `http://localhost:5033/api/cliente/consulta-60`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-60`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
-**61. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente:**  
+#### 61. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente:  
 
-**Endpoint**: `http://localhost:5033/api/empleado/consulta-61`  
+Endpoint: `http://localhost:5033/api/empleado/consulta-61`  
 
-**Método**: `GET`  
+Método: `GET`  
 
 
 ## Desarrollo ⌨️
