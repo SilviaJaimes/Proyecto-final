@@ -109,7 +109,7 @@ Para realizar la paginación se va al apartado de "Query" y se ingresa lo siguie
 **Método**: `GET`  
 
 
-**3. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos:**  
+#### 3. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos:  
 
 **Endpoint**: `http://localhost:5033/api/cliente/consulta-3`  
 
