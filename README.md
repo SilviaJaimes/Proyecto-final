@@ -97,9 +97,9 @@ Para realizar la paginación se va al apartado de "Query" y se ingresa lo siguie
 
 #### 1. Devuelve un listado con el nombre de los todos los clientes españoles:  
 
-*Endpoint*: `http://localhost:5033/api/cliente/consulta-1`  
+Endpoint: `http://localhost:5033/api/cliente/consulta-1`  
 
-*Método*: `GET`  
+Método: `GET`  
 
 
 #### 2. Devuelve un listado con los distintos estados por los que puede pasar un pedido: 
