@@ -1,4 +1,4 @@
-# Proyecto de jardinería
+# Proyecto de jardinería 🌿
 
 Este proyecto proporciona una API que permite llevar el control, gestión y registro de todos los productos y servicios de una jardinería.
 
