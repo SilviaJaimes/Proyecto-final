@@ -68,7 +68,7 @@ Una vez registrado el usuario tendrá que ingresar para recibir un token, este s
 
 Se dejan los mismos datos en el Body y luego se ingresa al "Auth", "Bearer", allí se ingresa el token obtenido en el anterior Endpoint.
 
-### Otros Endpoints
+## Otros Endpoints
 
 Obtener Todos los Usuarios: GET `http://localhost:5033/api/usuario`
 
@@ -95,14 +95,14 @@ Para realizar la paginación se va al apartado de "Query" y se ingresa lo siguie
 
 ![image](https://github.com/SilviaJaimes/Proyecto-Veterinaria/assets/132016483/22683e46-037e-4f30-96b8-161df8622b40)      
 
-**1. Devuelve un listado con el nombre de los todos los clientes españoles:**  
+### 1. Devuelve un listado con el nombre de los todos los clientes españoles:  
 
 **Endpoint**: `http://localhost:5033/api/cliente/consulta-1`  
 
 **Método**: `GET`  
 
 
-**2. Devuelve un listado con los distintos estados por los que puede pasar un pedido:**  
+### 2. Devuelve un listado con los distintos estados por los que puede pasar un pedido: 
 
 **Endpoint**: `http://localhost:5033/api/pedido/consulta-2`  
 
