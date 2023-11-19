@@ -68,7 +68,7 @@ Una vez registrado el usuario tendrá que ingresar para recibir un token, este s
 
 Se dejan los mismos datos en el Body y luego se ingresa al "Auth", "Bearer", allí se ingresa el token obtenido en el anterior Endpoint.
 
-**Otros Endpoints**
+### Otros Endpoints
 
 Obtener Todos los Usuarios: GET `http://localhost:5033/api/usuario`
 
