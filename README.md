@@ -14,9 +14,9 @@ Este proyecto proporciona una API que permite llevar el control, gestión y regi
 
 Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoints disponibles:
 
- En el archivo CSV se encuentra registrado el administrador con:  
+ En el archivo CSV se encuentra registrado el administrador con:   
  **usuario**: `Admini`  
- **Contraseña**: `pass1234`     
+ **Contraseña**: `pass1234`       
 Necesitaremos de este usuario para obtener el token que se utilizará para el registro de usuarios, ya que solo el administrador podra hacer todo con respecto al CRUD de los usuarios.
 
 ## 1. Generación del token 🔑:
@@ -83,11 +83,11 @@ Eliminar Usuario: DELETE `http://localhost:5033/api/usuario/{id}`
 
 Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin paginación. Estos son los siguientes:
 
-**6.** Devuelve un listado de todos los pedidos que fueron rechazados en 2009.  
-**12.** Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.  
-**31.** ¿Cuál fue el pago medio en 2009?  
-**40.** Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.  
-**57.** Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.  
+**6.** Devuelve un listado de todos los pedidos que fueron rechazados en 2009.    
+**12.** Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.    
+**31.** ¿Cuál fue el pago medio en 2009?    
+**40.** Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.    
+**57.** Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.    
 
 
 Para consultar la versión 1.0 de todos se ingresa únicamente el Endpoint; para consultar la versión 1.1 se deben seguir los siguientes pasos: 
