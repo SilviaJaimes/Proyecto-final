@@ -84,21 +84,40 @@ Eliminar Usuario: **DELETE** `http://localhost:5033/api/usuario/{id}`
 
 Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin paginación. Estos son los siguientes:
 
-**6.** Devuelve un listado de todos los pedidos que fueron rechazados en 2009.    
+**1.** Devuelve un listado con el nombre de los todos los clientes españoles.    
 
 
-**12.** Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.   
+**3.** Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos.   
 
 
-**31.** ¿Cuál fue el pago medio en 2009?    
+**19.** Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.    
 
 
-**40.** Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.    
+**26.** Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.    
 
 
-**57.** Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.    
+**17.** Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.    
 
 
+**22.** Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
+
+
+**2.** Devuelve un listado con los distintos estados por los que puede pasar un pedido.
+
+
+**4.** Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo. 
+
+
+**8.** Devuelve un listado con todos los pagos que se realizaron en el año 2008 mediante Paypal. Ordene el resultado de mayor a menor.    
+
+
+**9.** Devuelve un listado con todas las formas de pago que aparecen en la tabla pago. Tenga en cuenta que no deben aparecer formas de pago repetidas.
+
+
+**10.** Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.    
+
+
+**24.** Devuelve un listado de los productos que nunca han aparecido en un pedido.
 
 
 Para consultar la versión 1.0 de todos se ingresa únicamente el Endpoint; para consultar la versión 1.1 se deben seguir los siguientes pasos: 
