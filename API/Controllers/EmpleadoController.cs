@@ -123,6 +123,28 @@ public class EmpleadoController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-54")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> EmpleadosQueNoSeanRepresentantesDeVentas()
+    {
+        var entidad = await unitofwork.Empleados.EmpleadosQueNoSeanRepresentantesDeVentas();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-61")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> InfoEmpleadosQueNoSeanRepresentantes()
+    {
+        var entidad = await unitofwork.Empleados.InfoEmpleadosQueNoSeanRepresentantes();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

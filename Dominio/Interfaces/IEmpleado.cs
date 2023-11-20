@@ -10,4 +10,6 @@ public interface IEmpleado : IGenericRepository<Empleado>
     Task<IEnumerable<object>> EmpleadoSinCliente();
     Task<int> TotalEmpleados();
     Task<IEnumerable<object>> RepresentanteVentasConCantidadClientes();
+    Task<IEnumerable<object>> EmpleadosQueNoSeanRepresentantesDeVentas();
+    Task<IEnumerable<object>> InfoEmpleadosQueNoSeanRepresentantes();
 }

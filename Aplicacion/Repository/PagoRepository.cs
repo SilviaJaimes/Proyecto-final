@@ -54,6 +54,22 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
         return pagos;
     }
 
+    //Consulta 44
+    public async Task<IEnumerable<object>> TotalPagosPorAño()
+    {
+        var clientes = await (
+            from p in _context.Pagos
+            group p by p.FechaPago.Year into grupo
+            select new
+            {
+                Año = grupo.Key,
+                Total = grupo.Sum(tp => tp.Total)
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
     public override async Task<IEnumerable<Pago>> GetAllAsync()
     {
         return await _context.Pagos

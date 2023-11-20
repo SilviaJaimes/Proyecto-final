@@ -17,18 +17,17 @@ public class OficinaRepository : GenericRepoStr<Oficina>, IOficina
     //Consulta 26
     public async Task<IEnumerable<object>> OficinaSinEmpleadoRepresentante()
     {
-        var oficinas = await (
-            from o in _context.Oficinas
-            where !_context.Empleados.Any(e => _context.Clientes
-                .Where(c => c.CodigoEmpleado == e.Id)
-                .Any(c => c.Pedidos
-                    .Any(p => p.DetallePedidos
-                        .Any(dp => dp.Producto.GamaProducto.Id == "Frutales"))))
-            select new
-            {
-                Oficina = o.Id
-            }
-        ).ToListAsync();
+        var oficinas = await _context.Empleados
+                    .Where(e => e.Clientes.Any())
+                    .Where(e => e.CodigoOficina == null)
+                    .Where(e => e.Clientes.Any(c => c.Pedidos.Any(p => p.DetallePedidos.Any(dp => dp.Producto.GamaProducto.Id.Equals("Frutales")))))
+                    .Select(emp => new
+                    {
+                        Oficina = new 
+                        {
+                            emp.Oficina.Id
+                        }
+                    }).ToListAsync();
 
         return oficinas;
     }

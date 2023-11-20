@@ -10,5 +10,6 @@ public interface IPedido : IGenericRepository<Pedido>
     Task<IEnumerable<Object>> PedidosRechazadosEn2009();
     Task<IEnumerable<Object>> PedidosEntregadosEnEnero();
     Task<IEnumerable<object>> PedidosPorEstado();
-        Task<IEnumerable<object>> ProductosDiferentesPorPedido();
+    Task<IEnumerable<object>> ProductosDiferentesPorPedido();
+    Task<IEnumerable<object>> CantidadTotalDeProductosPorPedido();
 }

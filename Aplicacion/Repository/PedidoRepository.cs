@@ -113,21 +113,37 @@ public class PedidoRepository : GenericRepository<Pedido>, IPedido
 
     //Consulta 38
     public async Task<IEnumerable<object>> ProductosDiferentesPorPedido()
-{
-    var productos = await (
-        from dp in _context.DetallePedidos
-        join p in _context.Pedidos on dp.CodigoPedido equals p.Id
-        group dp.CodigoProducto by p into grupo
-        select new
-        {
-            Pedido = grupo.Key,
-            Productos = grupo.Distinct().ToList()
-        }
-    ).ToListAsync();
+    {
+        var productos = await (
+            from dp in _context.DetallePedidos
+            join p in _context.Pedidos on dp.CodigoPedido equals p.Id
+            group dp.CodigoProducto by p.Id into grupo
+            select new
+            {
+                Pedido = grupo.Key,
+                CantidadProductos = grupo.Distinct().Count()
+            }
+        ).ToListAsync();
 
-    return productos;
-}
+        return productos;
+    }
 
+    //Consulta 39
+    public async Task<IEnumerable<object>> CantidadTotalDeProductosPorPedido()
+    {
+        var productos = await (
+            from dp in _context.DetallePedidos
+            join p in _context.Pedidos on dp.CodigoPedido equals p.Id
+            group dp.Cantidad by p.Id into grupo
+            select new
+            {
+                Pedido = grupo.Key,
+                CantidadProductos = grupo.Sum()
+            }
+        ).ToListAsync();
+
+        return productos;
+    }
 
     public override async Task<IEnumerable<Pedido>> GetAllAsync()
     {

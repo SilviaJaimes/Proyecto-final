@@ -17,14 +17,24 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
     //Consulta 17
     public async Task<IEnumerable<object>> EmpleadoConJefes()
     {
-        var empleados = await (
-            from e in _context.Empleados
-            select new
-            {
-                NombreEmpleado = e.Nombre,
-                Jefe = e.Jefe.Nombre
-            }
-        ).ToListAsync();
+        var empleados = await _context.Empleados
+                    .Include( e=> e.Jefe)
+                    .Where(e => e.CodigoJefe != null && e.Jefe != null && e.Jefe.Jefe != null)
+                    .Select(emp => new
+                    {
+                        emp.Id,
+                        emp.Nombre,
+                        jefe = new 
+                        {
+                            emp.Jefe.Id,
+                            emp.Jefe.Nombre,
+                            jefe = new
+                            {
+                                emp.Jefe.Jefe.Id,
+                                emp.Jefe.Jefe.Nombre
+                            }
+                        }
+                    }).ToListAsync();
 
         return empleados;
     }
@@ -110,6 +120,45 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         ).ToListAsync();
 
         return representantes;
+    }
+
+    //Consulta 54
+    public async Task<IEnumerable<object>> EmpleadosQueNoSeanRepresentantesDeVentas()
+    {
+        var empleados = await (
+            from e in _context.Empleados
+            where e.Puesto == "Representante Ventas".ToLower() 
+            join c in _context.Clientes on e.Id equals c.CodigoEmpleado into representantes
+            where !representantes.Any()
+            select new
+            {
+                Id = e.Id,
+                NombreEmpleado = e.Nombre
+            }
+        ).ToListAsync();
+
+        return empleados;
+    }
+
+    //Consulta 61
+    public async Task<IEnumerable<object>> InfoEmpleadosQueNoSeanRepresentantes()
+    {
+        var empleados = await (
+            from e in _context.Empleados
+            where e.Puesto == "Representante Ventas".ToLower() 
+            join c in _context.Clientes on e.Id equals c.CodigoEmpleado into repre
+            where !repre.Any()
+            select new
+            {
+                NombreEmpleado = e.Nombre,
+                PrimerApellido = e.Apellido1,
+                SegundoApeddio = e.Apellido2,
+                Puesto = e.Puesto,
+                NumOficina = e.Oficina.Telefono
+            }
+        ).ToListAsync();
+
+        return empleados;
     }
 
     public override async Task<IEnumerable<Empleado>> GetAllAsync()

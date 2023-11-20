@@ -21,4 +21,15 @@ public interface ICliente : IGenericRepository<Cliente>
     Task<IEnumerable<object>> ClientesPorCiudadM();
     Task<int> ClientesSinRepresentante();
     Task<IEnumerable<object>> PrimerYUltimoPagoPorCliente();
+    Task<string> ClienteConMayorLimiteDeCredito();
+    Task<IEnumerable<object>> ClientesConLimiteDeCreditoMayorAPagos();
+    Task<string> ClienteConMayorLimite();
+    Task<IEnumerable<object>> ClientesQueNoHanRealizadoNingunPago();
+    Task<IEnumerable<object>> ClientesQueSiHanRealizadoAlgunPago();
+    Task<IEnumerable<object>> ClientesQueNoHanRealizadoPagos();
+    Task<IEnumerable<object>> ClientesQueSiHanRealizadoPagos();
+    Task<IEnumerable<object>> ClientesYPedidos();
+    Task<IEnumerable<object>> ClientesConPedidosEn2008();
+    Task<IEnumerable<object>> InfoRepresentanteDeClientesSinPagos();
+    Task<IEnumerable<object>> InfoRepresentanteDeClientes();
 }

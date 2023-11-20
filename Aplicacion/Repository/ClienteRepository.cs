@@ -319,6 +319,185 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return pagos;
     }
 
+    //Consulta 45
+    public async Task<string> ClienteConMayorLimiteDeCredito()
+    {
+        var clienteConMayorLimite = await _context.Clientes
+            .Where(c => c.LimiteCredito == _context.Clientes.Max(x => x.LimiteCredito))
+            .Select(c => c.NombreCliente)
+            .FirstOrDefaultAsync();
+
+        return clienteConMayorLimite;
+    }
+
+    //Consulta 48
+    public async Task<IEnumerable<object>> ClientesConLimiteDeCreditoMayorAPagos()
+    {
+        var clientes = await _context.Clientes
+            .Where(c => c.Pagos.Any())
+            .Where(c => c.LimiteCredito < c.Pagos.Sum(p => p.Total))
+            .Select(c => c.NombreCliente)
+            .ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 49
+    public async Task<string> ClienteConMayorLimite()
+    {
+        var clienteConMayorLimite = await _context.Clientes
+            .Where(c => c.LimiteCredito == _context.Clientes.Max(x => x.LimiteCredito))
+            .Select(c => c.NombreCliente)
+            .FirstOrDefaultAsync();
+
+        return clienteConMayorLimite;
+    }
+
+    //Consulta 51
+    public async Task<IEnumerable<object>> ClientesQueNoHanRealizadoNingunPago()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            join p in _context.Pagos on c.Id equals p.CodigoCliente into pagosGroup
+            where !pagosGroup.Any()
+            select new
+            {
+                NombreCliente = c.NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 52
+    public async Task<IEnumerable<object>> ClientesQueSiHanRealizadoAlgunPago()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            join p in _context.Pagos on c.Id equals p.CodigoCliente into pagos
+            where pagos.Any()
+            select new
+            {
+                NombreCliente = c.NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 55
+    public async Task<IEnumerable<object>> ClientesQueNoHanRealizadoPagos()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            join p in _context.Pagos on c.Id equals p.CodigoCliente into grupoDePagos
+            where !grupoDePagos.Any()
+            select new
+            {
+                NombreCliente = c.NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 56
+    public async Task<IEnumerable<object>> ClientesQueSiHanRealizadoPagos()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            join p in _context.Pagos on c.Id equals p.CodigoCliente into grupo
+            where grupo.Any()
+            select new
+            {
+                NombreCliente = c.NombreCliente
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 57
+    public async Task<IEnumerable<object>> ClientesYPedidos()
+    {
+        var clientes = await (
+            from c in _context.Clientes
+            select new
+            {
+                NombreCliente = c.NombreCliente,
+                CantidadPedidos = c.Pedidos.Count()
+            }
+        ).ToListAsync();
+
+        return clientes;
+    }
+
+    //Consulta 58
+    public async Task<IEnumerable<object>> ClientesConPedidosEn2008()
+    {
+        var pedidos = await (
+            from p in _context.Pedidos
+            join c in _context.Clientes on p.CodigoCliente equals c.Id
+            where p.FechaPedido.Year == 2008
+            group p by p.CodigoCliente into Grupo
+            select new
+            {
+                NombreCliente = Grupo.First().Cliente.NombreCliente
+            })
+            .OrderBy(cliente => cliente.NombreCliente)
+            .ToListAsync();
+
+        return pedidos;
+    }
+
+    //Consulta 59
+    public async Task<IEnumerable<object>> InfoRepresentanteDeClientesSinPagos()
+    {
+        var representantes = await (
+            from c in _context.Clientes
+            join p in _context.Pagos on c.Id equals p.CodigoCliente into grupoDePagos
+            where !grupoDePagos.Any()
+            select new
+            {
+                NombreCliente = c.NombreCliente,
+                RepresentanteDeVentas = (
+                    from e in _context.Empleados
+                    where e.Id == c.CodigoEmpleado  
+                    select new 
+                    {
+                        Nombre = e.Nombre,
+                        PrimerApellido = e.Apellido1,
+                        NumOficina = e.Oficina.Telefono
+                    }).FirstOrDefault()
+            }
+        ).ToListAsync();
+
+        return representantes;
+    }
+
+    //Consulta 60
+    public async Task<IEnumerable<object>> InfoRepresentanteDeClientes()
+    {
+        var representantes = await (
+            from c in _context.Clientes
+            select new
+            {
+                NombreCliente = c.NombreCliente,
+                RepresentanteDeVentas = (
+                    from e in _context.Empleados
+                    where e.Id == c.CodigoEmpleado  
+                    select new 
+                    {
+                        Nombre = e.Nombre,
+                        PrimerApellido = e.Apellido1,
+                        CiudadOficina = e.Oficina.Ciudad
+                    }).FirstOrDefault()
+            }
+        ).ToListAsync();
+
+        return representantes;
+    }
+
     public override async Task<IEnumerable<Cliente>> GetAllAsync()
     {
         return await _context.Clientes
