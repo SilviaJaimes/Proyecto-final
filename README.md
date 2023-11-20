@@ -45,7 +45,7 @@ Al obtener el token del administrador, se podrá realizar el registro de usuario
 Json
 
     {
-        "Usuario": "<nombre_de_usuario>",
+        "Nombre": "<nombre_de_usuario>",
         "Contraseña": "<contraseña>",
         "CorreoElectronico": "<correo_electronico>"
     }
