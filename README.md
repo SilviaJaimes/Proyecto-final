@@ -84,7 +84,7 @@ Eliminar Usuario: **DELETE** `http://localhost:5033/api/usuario/{id}`
 
 Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin paginación.
 
-### Endpoint con paginación
+### Endpoint con paginación 📄
 
 **1.** Devuelve un listado con el nombre de los todos los clientes españoles.    
 
