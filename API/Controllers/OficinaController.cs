@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-/* [Authorize] */
+[Authorize]
 
 public class OficinaController : BaseApiController
 {
@@ -66,6 +66,17 @@ public class OficinaController : BaseApiController
         var entidad = await unitofwork.Oficinas.OficinaSinEmpleadoRepresentante();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-26")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> OficinaSinEmpleadoRepresentantePaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Oficinas.OficinaSinEmpleadoRepresentantePaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
     }
 
     [HttpPost]

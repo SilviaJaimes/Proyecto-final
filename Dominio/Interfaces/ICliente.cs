@@ -5,7 +5,9 @@ namespace Dominio.Interfaces;
 public interface ICliente : IGenericRepository<Cliente>
 {
     Task<IEnumerable<Object>> ClientesEspañoles();
+    Task<(int totalRegistros, IEnumerable<Object> registros)> ClientesEspañolesPaginated(int pageIndex, int pageSize, string search = null);
     Task<IEnumerable<Object>> Pago2008();
+    Task<(int totalRegistros, IEnumerable<Object> registros)> Pago2008Paginated(int pageIndex, int pageSize, string search = null);
     Task<IEnumerable<Object>> ClientesMadridYRVConCodigo11O30();
     Task<IEnumerable<Object>> ClienteConSuRepresentante();
     Task<IEnumerable<object>> ClientesConPagos();

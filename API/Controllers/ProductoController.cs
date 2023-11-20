@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-/* [Authorize] */
+[Authorize]
 
 public class ProductoController : BaseApiController
 {
@@ -68,6 +68,17 @@ public class ProductoController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-10")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> ProductosOrnamentalesYMás100UnidadesPaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Productos.ProductosOrnamentalesYMás100UnidadesPaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+    }
+
     [HttpGet("consulta-24")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,6 +88,17 @@ public class ProductoController : BaseApiController
         var entidad = await unitofwork.Productos.ProductosSinPedido();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-24")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> ProductosSinPedidoPaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Productos.ProductosSinPedidoPaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
     }
 
     [HttpGet("consulta-25")]
@@ -101,38 +123,38 @@ public class ProductoController : BaseApiController
         return Ok(dto);
     }
 
-    /* [HttpGet("consulta-41")]
+    [HttpGet("consulta-41")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<object>> ProductosMasVendidosAgrupadaPorCodigo()
+    public async Task<ActionResult<object>> ProductosMasVendidosPorCodigo()
     {
-        var entidad = await unitofwork.Productos.ProductosMasVendidosAgrupadaPorCodigo();
+        var entidad = await unitofwork.Productos.ProductosMasVendidosPorCodigo();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
-    } */
+    }
 
-    /* [HttpGet("consulta-42")]
+    [HttpGet("consulta-42")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<object>> ProductosMasVendidosAgrupadaPorCodigoEmpiecenPorOR()
+    public async Task<ActionResult<object>> ProductosMasVendidosPorCodigoFiltrados()
     {
-        var entidad = await unitofwork.Productos.ProductosMasVendidosAgrupadaPorCodigoEmpiecenPorOR();
+        var entidad = await unitofwork.Productos.ProductosMasVendidosPorCodigoFiltrados();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
-    } */
+    }
 
-    /* [HttpGet("consulta-43")]
+    [HttpGet("consulta-43")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<object>> ProductosMásDe3000E()
+    public async Task<ActionResult<object>> VentasProductosMas3000Euros()
     {
-        var entidad = await unitofwork.Productos.ProductosMásDe3000E();
+        var entidad = await unitofwork.Productos.VentasProductosMas3000Euros();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
-    } */
+    }
 
     [HttpGet("consulta-46")]
     [MapToApiVersion("1.0")]

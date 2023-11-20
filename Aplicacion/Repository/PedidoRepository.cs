@@ -29,6 +29,32 @@ public class PedidoRepository : GenericRepository<Pedido>, IPedido
         return pedidos;
     }
 
+    //Consulta 2 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> EstadosPedidoPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from p in _context.Pedidos
+                    group p by p.Estado into Grupo
+                    select new
+                    {
+                        Estado = Grupo.Key
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.Estado.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
     //Consulta 4
     public async Task<IEnumerable<Object>> SinEntregarATiempo()
     {
@@ -44,6 +70,35 @@ public class PedidoRepository : GenericRepository<Pedido>, IPedido
             }).ToListAsync();
 
         return pedidos;
+    }
+
+    //Consulta 4 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> SinEntregarATiempoPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from p in _context.Pedidos
+                    where p.FechaEsperada < p.FechaEntrega
+                    select new
+                    {
+                        CodigoPedido = p.Id,
+                        CodigoCliente = p.CodigoCliente,
+                        FechaEsperada = p.FechaEsperada,
+                        FechaEntrega = p.FechaEntrega
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.CodigoCliente.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
     }
 
     //Consulta 5

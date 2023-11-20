@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-/* [Authorize] */
+[Authorize]
 
 public class ClienteController : BaseApiController
 {
@@ -68,6 +68,17 @@ public class ClienteController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-1")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> ClientesEspañolesPaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Clientes.ClientesEspañolesPaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+    }
+
     [HttpGet("consulta-3")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,6 +88,17 @@ public class ClienteController : BaseApiController
         var entidad = await unitofwork.Clientes.Pago2008();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-3")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> Pago2008Paginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Clientes.Pago2008Paginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
     }
 
     [HttpGet("consulta-11")]

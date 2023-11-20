@@ -28,6 +28,31 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
         return pagos;
     }
 
+    //Consulta 8 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> PagosEn2008Paginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = _context.Pagos
+                    .Where (p => p.FechaPago.Year == 2008 && p.FormaPago == "PayPal".ToLower())
+                    .Select(p => new
+                    {
+                        Total = p.Total
+                    }).OrderByDescending(pa => pa.Total);
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
     //Consulta 9
     public async Task<IEnumerable<Object>> FormasPago()
     {
@@ -40,6 +65,32 @@ public class PagoRepository : GenericRepoStr<Pago>, IPago
             }).ToListAsync();
 
         return pagos;
+    }
+
+    //Consulta 9 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> FormasPagoPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from p in _context.Pagos
+                    group p by p.FormaPago into Grupo
+                    select new
+                    {
+                        FormaPago = Grupo.Key
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.FormaPago.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
     }
 
     //Consulta 31

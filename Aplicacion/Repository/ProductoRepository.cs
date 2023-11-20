@@ -31,6 +31,41 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         return productos;
     }
 
+    //Consulta 10 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> ProductosOrnamentalesYMás100UnidadesPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = _context.Productos
+                    .Where(p => p.Gama == "Ornamentales".ToLower() && p.CantidadStock >= 100)
+                    .Select(p => new
+                    {
+                        Nombre = p.Nombre,
+                        Descripcion = p.Descripcion,
+                        Cantidad = p.CantidadStock,
+                        PrecioVenta = p.PrecioVenta
+                    });
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.Nombre.ToLower().Contains(lowerSearch) || m.Descripcion.ToLower().Contains(lowerSearch));
+        }
+
+        var orderedQuery = query.OrderByDescending(pv => pv.PrecioVenta);
+
+        int totalRegistros = await orderedQuery.CountAsync();
+
+        int totalPages = (int)Math.Ceiling((double)totalRegistros / pageSize);
+
+        pageIndex = Math.Min(pageIndex, totalPages);
+
+        var registros = await orderedQuery
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
     //Consulta 24
     public async Task<IEnumerable<object>> ProductosSinPedido()
     {
@@ -46,6 +81,34 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
         ).ToListAsync();
 
         return productos;
+    }
+
+    //Consulta 24 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> ProductosSinPedidoPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from p in _context.Productos
+                    join dp in _context.DetallePedidos on p.Id equals dp.CodigoProducto into Grupo
+                    where !Grupo.Any()
+                    select new
+                    {
+                        CodigoProducto = p.Id,
+                        Nombre = p.Nombre
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.CodigoProducto.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
     }
 
     //Consulta 25
@@ -88,65 +151,69 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
     }
 
     //Consulta 41
-    /* public async Task<IEnumerable<object>> ProductosMasVendidosAgrupadaPorCodigo()
+    public async Task<IEnumerable<object>> ProductosMasVendidosPorCodigo()
     {
-        var productosMasVendidos = await (
-            from dp in _context.DetallePedidos
-            group dp by dp.CodigoProducto into grupo
+        return await (
+            from detallePedido in _context.DetallePedidos
+            group detallePedido by detallePedido.CodigoProducto into grp
+            orderby grp.Sum(dp => dp.Cantidad) descending
             select new
             {
-                CodigoProducto = grupo.Key,
-                CantidadVendida = grupo.Sum(dp => dp.Cantidad)
+                CodigoProducto = grp.Key,
+                TotalUnidadesVendidas = grp.Sum(dp => dp.Cantidad)
             }
-            into resultado
-            orderby resultado.CantidadVendida descending
-            select resultado
-        )
-        .OrderBy(dp => dp.CodigoProducto)
-        .Take(20)
-        .ToListAsync();
+        ).Take(20).ToListAsync();
 
-        return productosMasVendidos;
-    } */
+    }
 
     //Consulta 42
-    /* public async Task<IEnumerable<object>> ProductosMasVendidosAgrupadaPorCodigoEmpiecenPorOR()
+    public async Task<IEnumerable<object>> ProductosMasVendidosPorCodigoFiltrados()
     {
-        var productosMasVendidos = await (
-            from dp in _context.DetallePedidos
-            where dp.CodigoProducto.StartsWith("OR")
-            group dp by dp.CodigoProducto into grupo
+        return await (
+            from detallePedido in _context.DetallePedidos
+            where detallePedido.Producto.Id.StartsWith("OR")
+            group detallePedido by detallePedido.CodigoProducto into grp
+            orderby grp.Sum(dp => dp.Cantidad) descending
             select new
             {
-                CodigoProducto = grupo.Key,
-                CantidadVendida = grupo.Sum(dp => dp.Cantidad)
+                CodigoProducto = grp.Key,
+                TotalUnidadesVendidas = grp.Sum(dp => dp.Cantidad)
             }
-            into resultado
-            orderby resultado.CantidadVendida descending
-            select resultado
-        )
-        .OrderBy(dp => dp.CodigoProducto)
-        .ToListAsync();
+        ).Take(20).ToListAsync();
 
-        return productosMasVendidos;
-    } */
+    }
 
     //Consulta 43
-    /* public async Task<IEnumerable<Object>> ProductosMásDe3000E()
+    public async Task<IEnumerable<object>> VentasProductosMas3000Euros()
     {
-        var productos = await _context.Pagos
-            .Where (p => p.Total <= 3000)
-            .Select(p => new
-            {
-                Nombre = p.Nombre,
-                Descripcion = p.Descripcion,
-                Cantidad = p.CantidadStock,
-                PrecioVenta = p.PrecioVenta
-            }).OrderByDescending(pv => pv.PrecioVenta)
+        var ventasProductos = await _context.DetallePedidos
+            .Include(dp => dp.Producto)
+            .GroupBy(
+                dp => new { dp.CodigoProducto, dp.Producto.Nombre, dp.Producto.PrecioVenta },
+                (key, group) => new
+                {
+                    key.CodigoProducto,
+                    key.Nombre,
+                    key.PrecioVenta,
+                    TotalFacturado = group.Sum(dp => (float)dp.Cantidad * (float)dp.Producto.PrecioVenta)
+                })
+            .Where(result => result.TotalFacturado * 1.21 > 3000)
             .ToListAsync();
 
-        return productos;
-    } */
+        var resultadoFinal = ventasProductos
+            .Select(item => new
+            {
+                item.Nombre,
+                UnidadesVendidas = _context.DetallePedidos
+                    .Where(dp => dp.CodigoProducto == item.CodigoProducto)
+                    .Sum(dp => dp.Cantidad),
+                item.TotalFacturado,
+                TotalConImpuestos = item.TotalFacturado * 1.21
+            })
+            .ToList();
+
+        return resultadoFinal;
+    }
 
     //Consulta 46
     public async Task<string> ProductoConPrecioMasCaro()

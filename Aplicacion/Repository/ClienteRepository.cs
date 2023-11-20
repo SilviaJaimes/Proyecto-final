@@ -30,6 +30,34 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
         return clientes;
     }
 
+    //Consulta 1 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> ClientesEspañolesPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from c in _context.Clientes
+                    where c.Pais == "Spain"
+                    select new
+                    {
+                        NombreCliente = c.NombreCliente,
+                        Telefono = c.Telefono,
+                        Ciudad = c.Ciudad
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.NombreCliente.ToLower().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
      //Consulta 3
     public async Task<IEnumerable<Object>> Pago2008()
     {
@@ -44,6 +72,34 @@ public class ClienteRepository : GenericRepository<Cliente>, ICliente
             }).ToListAsync();
 
         return pagos;
+    }
+
+    //Consulta 3 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> Pago2008Paginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from p in _context.Pagos
+                    join c in _context.Clientes on p.CodigoCliente equals c.Id
+                    where p.FechaPago.Year == 2008
+                    group p by p.CodigoCliente into Grupo
+                    select new
+                    {
+                        CodigoCliente = Grupo.Key
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.CodigoCliente.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
     }
 
     //Consulta 11

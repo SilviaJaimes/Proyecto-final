@@ -39,6 +39,42 @@ public class GamaProductoRepository : GenericRepoStr<GamaProducto>, IGamaProduct
         return gamas;
     }
 
+    //Consulta 19 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> GamasPorClientePaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from c in _context.Clientes
+                    select new
+                    {
+                        Cliente = c.NombreCliente,
+                        Gamas = (
+                            from p in _context.Pedidos
+                            join dp in _context.DetallePedidos on p.Id equals dp.CodigoPedido
+                            join pr in _context.Productos on dp.CodigoProducto equals pr.Id
+                            join gp in _context.GamaProductos on pr.Gama equals gp.Id
+                            where p.CodigoCliente == c.Id
+                            select new
+                            {
+                                Nombre = gp.Id
+                            }
+                        ).Distinct().ToList()
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.Cliente.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
     public override async Task<IEnumerable<GamaProducto>> GetAllAsync()
     {
         return await _context.GamaProductos

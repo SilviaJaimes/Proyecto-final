@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-/* [Authorize] */
+[Authorize]
 
 public class EmpleadoController : BaseApiController
 {
@@ -68,6 +68,17 @@ public class EmpleadoController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-17")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> EmpleadoConJefesPaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Empleados.EmpleadoConJefesPaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+    }
+
     [HttpGet("consulta-22")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,6 +88,17 @@ public class EmpleadoController : BaseApiController
         var entidad = await unitofwork.Empleados.EmpleadosSinClienteAsociado();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-22")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> EmpleadosSinClienteAsociadoPaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Empleados.EmpleadosSinClienteAsociadoPaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
     }
 
     [HttpGet("consulta-23")]

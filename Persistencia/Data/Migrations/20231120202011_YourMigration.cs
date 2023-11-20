@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistencia.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateMig : Migration
+    public partial class YourMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

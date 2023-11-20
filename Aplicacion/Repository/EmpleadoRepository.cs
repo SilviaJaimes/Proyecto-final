@@ -39,6 +39,44 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         return empleados;
     }
 
+    //Consulta 17 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> EmpleadoConJefesPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = _context.Empleados
+                    .Include( e=> e.Jefe)
+                    .Where(e => e.CodigoJefe != null && e.Jefe != null && e.Jefe.Jefe != null)
+                    .Select(emp => new
+                    {
+                        emp.Id,
+                        emp.Nombre,
+                        jefe = new 
+                        {
+                            emp.Jefe.Id,
+                            emp.Jefe.Nombre,
+                            jefe = new
+                            {
+                                emp.Jefe.Jefe.Id,
+                                emp.Jefe.Jefe.Nombre
+                            }
+                        }
+                    });
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.Id.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
     //Consulta 22
     public async Task<IEnumerable<object>> EmpleadosSinClienteAsociado()
     {
@@ -60,6 +98,40 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         ).ToListAsync();
 
         return empleados;
+    }
+
+    //Consulta 22 con paginación
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> EmpleadosSinClienteAsociadoPaginated(int pageIndex, int pageSize, string search = null)
+    {
+        var query = from e in _context.Empleados
+                    join c in _context.Clientes on e.Id equals c.CodigoEmpleado into Grupo
+                    where !Grupo.Any()
+                    select new
+                    {
+                        NombreEmpleado = e.Nombre,
+                        Oficina = (from o in _context.Oficinas
+                                    where e.CodigoOficina == o.Id 
+                                    select new {
+                                        Codigo = o.Id,
+                                        Ciudad = o.Ciudad,
+                                        Telefono = o.Telefono
+                                    }).ToList()
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.NombreEmpleado.ToString().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
     }
 
     //Consulta 23

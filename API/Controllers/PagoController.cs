@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-/* [Authorize] */
+[Authorize]
 
 public class PagoController : BaseApiController
 {
@@ -68,6 +68,17 @@ public class PagoController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-8")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> PagosEn2008Paginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Pagos.PagosEn2008Paginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+    }
+
     [HttpGet("consulta-9")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,6 +88,17 @@ public class PagoController : BaseApiController
         var entidad = await unitofwork.Pagos.FormasPago();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-9")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> FormasPagoPaginated([FromQuery] Params entidadparams)
+    {
+        var entidad = await unitofwork.Pagos.FormasPagoPaginated(entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, entidadparams.PageIndex, entidadparams.PageSize, entidadparams.Search);
     }
 
     [HttpGet("consulta-31")]
