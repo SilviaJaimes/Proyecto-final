@@ -27,10 +27,10 @@ Necesitaremos de este usuario para obtener el token que se utilizará para el re
 
 **Payload**:
 
-`{
-    "Nombre": "Admini",
-    "Contraseña": "pass1234"
-}`
+    {
+        "Nombre": "Admini",
+        "Contraseña": "pass1234"
+    }
 
 Al obtener el token del administrador, se podrá realizar el registro de usuarios.
 
@@ -42,12 +42,13 @@ Al obtener el token del administrador, se podrá realizar el registro de usuario
 
 **Payload**:
 
-json
-`{
-    "Usuario": "<nombre_de_usuario>",
-    "Contraseña": "<contraseña>",
-    "CorreoElectronico": "<correo_electronico>"
-}`
+Json
+
+    {
+        "Usuario": "<nombre_de_usuario>",
+        "Contraseña": "<contraseña>",
+        "CorreoElectronico": "<correo_electronico>"
+    }
 
 Este endpoint permite a los usuarios registrarse en el sistema.
 
@@ -61,10 +62,10 @@ Una vez registrado el usuario tendrá que ingresar para recibir un token, este s
 
 **Payload**:
 
-`{
-    "Nombre": "<nombre_de_usuario>",
-    "Contraseña": "<contraseña>"
-}`
+    {
+        "Nombre": "<nombre_de_usuario>",
+        "Contraseña": "<contraseña>"
+    }
 
 Se dejan los mismos datos en el Body y luego se ingresa al "Auth", "Bearer", allí se ingresa el token obtenido en el anterior Endpoint.
 
