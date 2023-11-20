@@ -71,13 +71,13 @@ Se dejan los mismos datos en el Body y luego se ingresa al "Auth", "Bearer", all
 
 ## Otros Endpoints
 
-Obtener Todos los Usuarios: GET `http://localhost:5033/api/usuario`
+Obtener Todos los Usuarios: **GET** `http://localhost:5033/api/usuario`
 
-Obtener Usuario por ID: GET `http://localhost:5033/api/usuario/{id}`
+Obtener Usuario por ID: **GET** `http://localhost:5033/api/usuario/{id}`
 
-Actualizar Usuario: PUT `http://localhost:5033/api/usuario/{id}`
+Actualizar Usuario: **PUT** `http://localhost:5033/api/usuario/{id}`
 
-Eliminar Usuario: DELETE `http://localhost:5033/api/usuario/{id}`
+Eliminar Usuario: **DELETE** `http://localhost:5033/api/usuario/{id}`
 
 
 ## Desarrollo de los Endpoints requeridos⌨️
