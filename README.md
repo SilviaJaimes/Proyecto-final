@@ -84,9 +84,17 @@ Eliminar Usuario: DELETE `http://localhost:5033/api/usuario/{id}`
 Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin paginación. Estos son los siguientes:
 
 **6.** Devuelve un listado de todos los pedidos que fueron rechazados en 2009.    
-**12.** Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.    
+
+
+**12.** Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.   
+
+
 **31.** ¿Cuál fue el pago medio en 2009?    
+
+
 **40.** Devuelve un listado de los 20 productos más vendidos y el número total de unidades que se han vendido de cada uno. El listado deberá estar ordenado por el número total de unidades vendidas.    
+
+
 **57.** Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.    
 
 
