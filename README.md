@@ -98,6 +98,8 @@ Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin pag
 **57.** Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.    
 
 
+
+
 Para consultar la versión 1.0 de todos se ingresa únicamente el Endpoint; para consultar la versión 1.1 se deben seguir los siguientes pasos: 
 
 En el Thunder Client se va al apartado de "Headers" y se ingresa lo siguiente:
