@@ -28,6 +28,7 @@ public class GamaProductoRepository : GenericRepoStr<GamaProducto>, IGamaProduct
                     join pr in _context.Productos on dp.CodigoProducto equals pr.Id
                     join gp in _context.GamaProductos on pr.Gama equals gp.Id
                     where p.CodigoCliente == c.Id
+                    where p.Estado.Contains("Entregado")
                     select new
                     {
                         Nombre = gp.Id
