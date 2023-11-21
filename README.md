@@ -89,22 +89,10 @@ Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin pag
 **1.** Devuelve un listado con el nombre de los todos los clientes españoles.    
 
 
-**3.** Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos.   
-
-
-**19.** Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.    
-
-
-**26.** Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.    
-
-
-**17.** Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.    
-
-
-**22.** Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
-
-
 **2.** Devuelve un listado con los distintos estados por los que puede pasar un pedido.
+
+
+**3.** Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos.   
 
 
 **4.** Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo. 
@@ -116,10 +104,22 @@ Hay Endpoints que tiene su versión 1.0 y 1.1, al igual que están con y sin pag
 **9.** Devuelve un listado con todas las formas de pago que aparecen en la tabla pago. Tenga en cuenta que no deben aparecer formas de pago repetidas.
 
 
-**10.** Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.    
+**10.** Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio. 
+
+
+**17.** Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+
+
+**19.** Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.    
+
+
+**22.** Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
 
 
 **24.** Devuelve un listado de los productos que nunca han aparecido en un pedido.
+
+
+**26.** Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.    
 
 
 Para consultar la versión 1.0 de todos se ingresa únicamente el Endpoint; para consultar la versión 1.1 se deben seguir los siguientes pasos: 
